@@ -1,0 +1,148 @@
+<ng-template tdLoading="overlayStarSyntax">
+    <mat-card class="user-card">
+        <mat-card-header>
+            <mat-card-title>
+                {{pageTitle}}
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+
+            <div td-toolbar-content layout="row" layout-align="center center" flex>
+                <span flex></span>
+                <detail-page-nav [page]="pageAction" [model]="contact" [url]="'/business-opps/contacts/'" (deleteRecord)="deleteRecord($event)"></detail-page-nav>
+            </div>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <form [formGroup]="contactForm" novalidate (ngSubmit)="save(contactForm.value, contactForm.valid)">
+            <mat-card-content>
+
+                <div layout="row" layout-sm="column" layout-xs="column">
+                    <div flex layout-padding>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="first_name" required type="text" [placeholder]="componentLabels.first_name">
+                                <mat-error *ngIf="contactForm.controls.first_name.valid || (contactForm.controls.first_name.pristine && !submitted)">
+                                    <validation-error [control]="contactForm.controls.first_name" [error]="''" [label]="componentLabels.first_name">
+
+                                    </validation-error>
+
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="last_name" type="text" [placeholder]="componentLabels.last_name">
+                            </mat-form-field>
+                        </div>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput  formControlName="account" type="text" [placeholder]="componentLabels.account">
+                            </mat-form-field>
+                        </div>
+  
+
+                        <gc-auto-complete [gcFormGroup]="contactForm" [label]="componentLabels.company" 
+                            [keyControlName]="'company'" [titleControlName]="'company_title'"
+                            [control]="contactForm.controls.company_title" [required]="false" [service]="_companyService" [responseKey]="'companies'"
+                            [nameKey]="'name'" [idKey]="'_id'" >
+                        </gc-auto-complete>
+
+
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput required formControlName="email" type="text" [placeholder]="componentLabels.email">
+                            </mat-form-field>
+                        </div>
+
+
+
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="skype_id" type="text" [placeholder]="componentLabels.skype_id">
+                            </mat-form-field>
+                        </div>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="website" type="text" [placeholder]="componentLabels.website">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                    <div flex layout-padding>
+
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="phone" type="text" [placeholder]="componentLabels.phone">
+                            </mat-form-field>
+                        </div>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="mobile" type="text" [placeholder]="componentLabels.mobile">
+                            </mat-form-field>
+                        </div>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="fax" type="text" [placeholder]="componentLabels.fax">
+                            </mat-form-field>
+                        </div>
+
+
+
+
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="mailing_street" type="text" [placeholder]="componentLabels.mailing_street">
+                            </mat-form-field>
+                        </div>
+
+
+
+                        <div layout="row" layout-padding-left>
+                            <div fxFlex>
+                                <mat-form-field flex>
+                                    <input matInput formControlName="city" type="text" [placeholder]="componentLabels.city">
+                                </mat-form-field>
+                                <mat-form-field flex>
+                                    <input matInput formControlName="zip" type="text" [placeholder]="componentLabels.zip">
+                                </mat-form-field>
+
+                                <mat-form-field flex>
+                                    <input matInput formControlName="state" type="text" [placeholder]="componentLabels.state">
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="country" type="text" [placeholder]="componentLabels.country">
+                            </mat-form-field>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div layout="row" layout-sm="row" layout-xs="row">
+                    <div flex layout-padding>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="description" type="text" [placeholder]="componentLabels.description">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+
+            </mat-card-content>
+            <div *ngIf="editMode && editMode == true">
+                <mat-card-actions>
+                    <button type="submit" mat-raised-button color="primary" [disabled]="!contactForm.valid">Save</button>
+                    <a mat-button class="tc-grey-600" [routerLink]="['/business-opps/contacts/index/']">Cancel</a>
+                </mat-card-actions>
+            </div>
+        </form>
+    </mat-card>
+
+
+</ng-template>

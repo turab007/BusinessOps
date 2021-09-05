@@ -1,0 +1,77 @@
+<!--<div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm" *ngIf="filteredData">
+    <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+                <span class="mat-title">Search</span>
+    </span>
+
+    <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)"
+        flex>
+    </td-search-box>
+</div>
+<mat-divider></mat-divider>-->
+<table td-data-table #dataTable>
+
+    <th td-data-table-column *ngFor="let column of columns" width="{{column.width}}" [numeric]="column.numeric" [sortable]="true"
+        [sortOrder]="columnSortOrders[column.name]" (click)="activateColumnSorting(column)" (sortChange)="sort($event,column.name)" [active]="activeSortedColumn[column.name]">
+        {{column.label}}
+    </th>
+    <th td-data-table-column *ngIf="actionButtons && actionButtons.length" class="col-action-button" width="4%">
+        <span (click)="toggleFilter()" class="search-btn">
+                <mat-icon mat-list-avatar>search</mat-icon>
+            </span>
+    </th>
+    <tbody>
+        <tr td-data-table-row class="search-row" [@toggleState]="filterState">
+            <th width="{{column.width}}" td-data-table-column *ngFor="let column of columns">
+                <div layout="row">
+                    <input placeholder="Search by {{column.label}}" type="text" (change)="__filterRecords($event, column.name)" class="search-input">
+                </div>
+            </th>
+            <th></th>
+        </tr>
+        <tr td-data-table-row *ngFor="let row of filteredData; let index=index" on-mouseover="hoveredIndex=index">
+            <td td-data-table-cell *ngFor="let column of columns" [numeric]="column.numeric">
+                {{column.format ? column.format(row[column.name]) : row[column.name]}}
+            </td>
+            
+            <td td-data-table-cell class="col-action-button" *ngIf="actionButtons && actionButtons.length">
+                <div layout="row" *ngIf="index==hoveredIndex" style='background:white; position: absolute; margin: -23px 0px -9px -83px; height:46px; right:10px;'>
+                    <!--<a [routerLink]="" mat-menu-item class="test">
+                        <mat-icon class="t2">visibility</mat-icon>
+                    </a>
+                    <a [routerLink]="" mat-menu-item class="test">
+                        <mat-icon class="t2">edit</mat-icon>
+                    </a>
+                    <a [routerLink]="" mat-menu-item class="test">
+                        <mat-icon class="t2">delete</mat-icon>
+                    </a>-->
+
+                    <mat-list-item>
+                        <span>
+                            <button mat-icon-button [mat-menu-trigger-for]="menu" style="margin-top:3px;">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+
+                        <mat-menu x-position="before" #menu="matMenu">
+                            <span *ngFor="let button of actionButtons">
+
+                                <a *ngIf="button.action != 'delete'" [routerLink]="[button.url, row['_id']]" mat-menu-item>
+                                    <mat-icon>{{button.icon}}</mat-icon>{{button.title}}
+                                </a>
+                                <button *ngIf="button.action == 'delete'" mat-menu-item (click)="__deleteRecord(row)"><mat-icon>delete</mat-icon>Delete</button>
+                            </span>
+
+                        </mat-menu>
+                        </span>
+                    </mat-list-item>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mat-padding" *ngIf="!filteredData" layout="row" layout-align="center center">
+    <h3>No results to display.</h3>
+</div>
+<td-paging-bar #pagingBar [pageSize]="pageSizes" [total]="filteredTotal" (change)="page($event)">
+    <span td-paging-bar-label hide-xs>Row per page:</span> {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+</td-paging-bar>

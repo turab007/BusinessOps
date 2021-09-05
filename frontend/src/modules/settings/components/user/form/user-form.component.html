@@ -1,0 +1,106 @@
+<ng-template tdLoading="overlayStarSyntax">
+    <mat-card class="user-card">
+        <mat-card-header>
+            <mat-card-title>
+                {{pageTitle}}
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+
+            <div td-toolbar-content layout="row" layout-align="center center" flex>
+                <span flex></span>
+                <detail-page-nav [page]="pageAction" [model]="user" [url]="'/settings/users/'" (deleteRecord)="deleteRecord($event)"></detail-page-nav>
+            </div>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <form [formGroup]="userForm" novalidate (ngSubmit)="save(userForm.value, userForm.valid)">
+            <mat-card-content>
+
+                <!-- We'll add our form controls here -->
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+
+                        <input matInput required type="text" formControlName="first_name" [placeholder]="componentLabels.first_name" validate-onblur>
+                        <mat-error *ngIf="userForm.controls.first_name.valid || (userForm.controls.first_name.pristine && !submitted)">
+                            <validation-error [control]="userForm.controls.first_name" [error]="''" [label]="componentLabels.first_name">
+
+                            </validation-error>
+
+                        </mat-error>
+                    </mat-form-field>
+
+
+                </div>
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+                        <input matInput required type="text" formControlName="last_name" [placeholder]="componentLabels.last_name" validate-onblur>
+
+                        <mat-error *ngIf="userForm.controls.last_name.valid || (userForm.controls.last_name.pristine && !submitted)">
+                            <validation-error [control]="userForm.controls.last_name" [error]="''" [label]="componentLabels.last_name">
+
+                            </validation-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+                        <input matInput required type="text" formControlName="user_id" [placeholder]="componentLabels.user_id" validate-onblur>
+                        <mat-error *ngIf="userForm.controls.user_id.valid ||(userForm.controls.user_id.pristine && !submitted)">
+                            <validation-error [control]="userForm.controls.user_id" [error]="''" [label]="componentLabels.user_id">
+
+                            </validation-error>
+
+
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+
+                <div layout="row" layout-margin *ngIf="userForm.controls.is_employee.value">
+                    <mat-form-field fxFlex>
+                        <input matInput required type="text" formControlName="emp_jobTtile" [placeholder]="componentLabels.emp_jobTtile" validate-onblur>
+                        <mat-error *ngIf="userForm.controls.emp_jobTtile.valid ||(userForm.controls.emp_jobTtile.pristine && !submitted)">
+                            <validation-error [control]="userForm.controls.emp_jobTtile" [error]="''" [label]="componentLabels.emp_jobTtile">
+
+                            </validation-error>
+
+
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+
+
+                <div layout="row" style="margin:10px 0px 0px 10px;">
+                    <div flex="25">
+                        <mat-slide-toggle [checked]="userForm.controls.status.value" formControlName="status">Active</mat-slide-toggle>
+                    </div>
+                    <div flex="25">
+                        <mat-slide-toggle [checked]="userForm.controls.is_admin.value" formControlName="is_admin"> Is Admin?</mat-slide-toggle>
+                    </div>
+                    <div flex="25">
+                        <mat-slide-toggle [checked]="userForm.controls.is_employee.value" formControlName="is_employee"> Employee</mat-slide-toggle>
+                    </div>
+                </div>
+
+                <!--<div layout="row" layout-margin>
+
+                </div>
+
+                <div layout="row" layout-margin>
+
+                </div>-->
+
+
+
+            </mat-card-content>
+            <div *ngIf="editMode && editMode == true">
+                <mat-card-actions>
+                    <button type="submit" mat-raised-button color="primary" [disabled]="!userForm.valid">Save</button>
+                    <a mat-button class="tc-grey-600" [routerLink]="['/settings/users/']">Cancel</a>
+                </mat-card-actions>
+            </div>
+        </form>
+    </mat-card>
+
+
+</ng-template>

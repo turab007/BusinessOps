@@ -1,0 +1,37 @@
+<div class="modal-close-btn"><mat-icon (click)="dialogRef.close()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>{{componentTitle}}</h4></div>
+  <form  [formGroup]="taskForm" (ngSubmit)="save(taskForm.value, taskForm.valid)" id="add-task-form" class="form-content">
+        <mat-form-field class="input-wrapper">
+            <input matInput type="text" formControlName="name" [placeholder]="componentLabels.name" required="true" maxlength="100" appFocus/>
+            <mat-error *ngIf="taskForm.controls.name.valid || (taskForm.controls.name.pristine && !submitted)">
+                <validation-error [control]="taskForm.controls.name" [error]="''" [label]="componentLabels.name"></validation-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-wrapper">
+            <mat-select [placeholder]="componentLabels.assigned_to" formControlName="assigned_to">
+                <mat-option *ngFor="let user of user_roles" [value]="user._id.id">
+                    {{ user._id.fullname }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-wrapper">
+            <mat-select [placeholder]="componentLabels.status" formControlName="status">
+                <mat-option *ngFor="let status of statusList" [value]="status">
+                    {{ status }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="modal-btns">
+            <button mat-raised-button color=primary class="primary" type="submit">Save</button>
+            <button mat-raised-button class="default-btn" type="button" (click)="dialogRef.close()">Close</button>
+        </div>
+    </form>
+</div>
+
+
+
+

@@ -1,0 +1,9 @@
+<div fxLayout="column" fxLayoutAlign="center center" *ngIf="employee">
+  <mat-icon class="empIcon">
+    account_circle
+  </mat-icon>
+
+      <p>{{employee.user.fullname}}</p> 
+   <p>{{employee.user.user_id}}</p> 
+   <p>{{employee.job_title.value}}</p>    
+</div>

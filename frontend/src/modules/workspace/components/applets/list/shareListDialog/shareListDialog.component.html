@@ -1,0 +1,17 @@
+<div class="modal-close-btn"><mat-icon (click)="close()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>Share</h4></div>
+  <form *ngIf="shareForm" [formGroup]="shareForm" (ngSubmit)="share(shareForm.value, shareForm.valid)" id="add-ws-form" class="form-content">
+    <mat-form-field class="input-wrapper">
+      <input matInput type="text" formControlName="shareEmail" placeholder="Email" required="true" maxlength="100" autocomplete="off"/>
+      <mat-error *ngIf="shareForm.controls.shareEmail.valid || (shareForm.controls.shareEmail.pristine && !submitted)">
+        <validation-error [control]="shareForm.controls.shareEmail" [error]="''" [label]="componentLabels.shareEmail">
+        </validation-error>
+      </mat-error>
+    </mat-form-field>
+    <div class="modal-btns">
+      <button mat-raised-button color=primary class="action-btn" id="save-btn" [disabled]="!shareForm.valid">Share</button>
+      <button mat-raised-button class="default-btn" type="button" (click)="close()">Close</button>
+    </div>
+  </form>
+</div>

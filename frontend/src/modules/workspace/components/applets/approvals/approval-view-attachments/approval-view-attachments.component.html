@@ -1,0 +1,47 @@
+<div class="attachmentSection">
+  <h4 class="extra-info">Attachments
+    <span>({{attachments.length||0}}) </span>
+  </h4>
+  <!-- Hidden as type file is not supported by material yet -->
+  <input #fileToUpload type="file" style="display:none;" multiple (change)="saveAttachment(fileToUpload)">
+  <div class="file-attachments">
+    <div class="file-content" *ngFor="let attach of attachments" (click)="downloadAttachment(attach)">
+      <figure *ngIf="attach.mimetype=='image/jpeg'">
+        <img src="../../../../../../assets/icons/attachment/jpg.png" />
+        <mat-icon (click)="deleteAttachment($event,attach)">close</mat-icon>
+      </figure>
+      <figure *ngIf="attach.mimetype=='application/pdf'">
+        <img src="../../../../../../assets/icons/attachment/pdf.png" />
+        <mat-icon (click)="deleteAttachment($event,attach)">close</mat-icon>
+      </figure>
+      <figure *ngIf="attach.mimetype=='image/png'">
+        <img src="../../../../../../assets/icons/attachment/png.png" />
+        <mat-icon (click)="deleteAttachment($event,attach)">close</mat-icon>
+      </figure>
+      <figure *ngIf="attach.mimetype=='application/zip'">
+        <img src="../../../../../../assets/icons/attachment/zip.png" />
+        <mat-icon (click)="deleteAttachment($event,attach)">close</mat-icon>
+      </figure>
+      <figure *ngIf="attach.mimetype=='application/wps-office.docx' || attach.mimetype=='application/vnd.openxmlformats-officedocument.wordprocessingml.document'">
+        <img src="../../../../../../assets/icons/attachment/doc.png" />
+        <mat-icon (click)="deleteAttachment($event,attach)">close</mat-icon>
+      </figure>
+      <figure *ngIf="attach.mimetype !='application/wps-office.docx' && 
+      attach.mimetype !='application/vnd.openxmlformats-officedocument.wordprocessingml.document' &&
+      attach.mimetype !='image/jpeg' && 
+      attach.mimetype !='application/pdf' && 
+      attach.mimetype !='image/png' &&
+      attach.mimetype !='application/zip' ">
+        <img src="../../../../../../assets/icons/attachment/icon_file.png" />
+        <mat-icon (click)="deleteAttachment($event,attach)">close</mat-icon>
+      </figure>
+      <div class="file-desc">
+        <span class="attach-head">{{attach.originalname.toLocaleLowerCase()}}</span>
+      </div>
+    </div>
+  </div>
+  <a matTooltip="add" (click)="fileToUpload.click()" class="attachment-link">
+    <mat-icon>attachment</mat-icon>
+    <span>Add Attachments</span>
+  </a>
+</div>

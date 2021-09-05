@@ -1,0 +1,16 @@
+<div layout="row" *ngFor="let release of releases">
+    <mat-card flex>
+        <mat-card-header>
+            <mat-card-title>{{release.name}}</mat-card-title>
+            <mat-card-subtitle>{{release.version}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <div style="display:none">{{release._id}}</div>
+
+             <div [innerHTML]="release.description"></div>
+
+            <!--{{release.description}}-->
+        </mat-card-content>
+    </mat-card>
+</div>

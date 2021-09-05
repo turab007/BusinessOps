@@ -1,0 +1,25 @@
+.col-action-button{
+    text-align: right;
+}
+
+.search-row{
+    background: #F5F5F5;
+}
+
+.search-btn{
+    cursor: pointer
+}
+
+.search-input{
+    border: none;font-size:13px;font-weight:normal;padding: 5px;background: none;
+}
+
+
+.test{
+     padding:0px 3px !important;
+}
+.t2{
+     margin:0px !important;
+     font-size: 18px;
+}
+/**/

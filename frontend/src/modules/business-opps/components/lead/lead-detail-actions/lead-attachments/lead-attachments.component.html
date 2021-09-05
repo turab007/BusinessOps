@@ -1,0 +1,193 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <strong>Add Attachments</strong>
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+        <form [formGroup]="fg" novalidate (ngSubmit)="save(fg.value, fg.valid)">
+            <div layout="column">
+                <div layout="row">
+                    <mat-form-field flex>
+                        <input matInput formControlName="title" type="text" [placeholder]="componentLabels.title">
+                        <mat-error *ngIf="fg.controls.title.valid || (fg.controls.title.pristine && !submitted)">
+                            <validation-error [control]="fg.controls.title" [error]="''" [label]="componentLabels.title"> </validation-error>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-checkbox formControlName="is_important" style="margin:10px 0px 0px 15px;">
+                        Important
+                    </mat-checkbox>
+                </div>
+
+                <div layout="row" flex>
+
+                    <mat-form-field [disabled]="disabled" tdFileDrop (fileDrop)="files = $event" (click)="fileInput.inputElement.click()"
+                        (keyup.enter)="fileInput.inputElement.click()" (keyup.delete)="fileInput.clear()" (keyup.backspace)="fileInput.clear()"
+                        flex>
+
+                        <input matInput placeholder="select or drop files" [value]="files?.length ? (files?.length + ' files') : files?.name" [disabled]="disabled"
+                            readonly/>
+
+                    </mat-form-field>
+
+                    <button mat-icon-button *ngIf="files" (click)="fileInput.clear()" (keyup.enter)="fileInput.clear()">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                    <td-file-input class="push-left-sm push-right-sm" #fileInput [disabled]="disabled" multiple>
+                        <mat-icon>folder</mat-icon>
+                        <span class="text-upper">Browse...</span>
+                    </td-file-input>
+                </div>
+            </div>
+            <div layout="row" style="margin-top:15px;">
+                <span flex></span>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!fg.valid">Save</button>
+                <a mat-button class="tc-grey-600">Cancel</a>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<div>
+    <div style="text-align: center">
+        <h3>Today</h3>
+    </div>
+
+    <mat-list>
+        <mat-list-item>
+            <div layout="row" flex>
+                <mat-icon mat-list-icon>attachment</mat-icon>
+                <div flex="30" style="margin-top:7px">Title of the attachment</div>
+                <div style="margin-top:7px">Business Ops.pdf</div>
+                <span flex></span>
+                <div style="margin-top:7px; font-size:12px; color:gray">By: M Usman Saeed</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div layout="row" flex>
+                <mat-icon mat-list-icon>attachment</mat-icon>
+                <div flex="30" style="margin-top:7px">Title of the attachment</div>
+                <div style="margin-top:7px">Business Ops.pdf</div>
+                <span flex></span>
+                <div style="margin-top:7px; font-size:12px; color:gray">By: M Usman Saeed</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div layout="row" flex>
+                <mat-icon mat-list-icon>attachment</mat-icon>
+                <div flex="30" style="margin-top:7px">Title of the attachment</div>
+                <div style="margin-top:7px">Business Ops.pdf</div>
+                <span flex></span>
+                <div style="margin-top:7px; font-size:12px; color:gray">By: M Usman Saeed</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+    </mat-list>
+</div>
+
+<div>
+    <div style="text-align: center">
+        <h3>Important</h3>
+    </div>
+
+    <mat-list>
+        <mat-list-item>
+            <div layout="row" flex>
+                <mat-icon mat-list-icon>attachment</mat-icon>
+                <div flex="30" style="margin-top:7px">Title of the attachment</div>
+                <div style="margin-top:7px">Business Ops.pdf</div>
+                <span flex></span>
+                <div style="margin-top:7px; font-size:12px; color:gray">By: M Usman Saeed</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div layout="row" flex>
+                <mat-icon mat-list-icon>attachment</mat-icon>
+                <div flex="30" style="margin-top:7px">Title of the attachment</div>
+                <div style="margin-top:7px">Business Ops.pdf</div>
+                <span flex></span>
+                <div style="margin-top:7px; font-size:12px; color:gray">By: M Usman Saeed</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div layout="row" flex>
+                <mat-icon mat-list-icon>attachment</mat-icon>
+                <div flex="30" style="margin-top:7px">Title of the attachment</div>
+                <div style="margin-top:7px">Business Ops.pdf</div>
+                <span flex></span>
+                <div style="margin-top:7px; font-size:12px; color:gray">By: M Usman Saeed</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+    </mat-list>
+</div>
+
+
+<div>
+    <div style="text-align: center">
+        <h3>Past</h3>
+    </div>
+
+    <mat-list>
+        <mat-list-item>
+            <div layout="row" flex>
+                <mat-icon mat-list-icon>attachment</mat-icon>
+                <div flex="30" style="margin-top:7px">Title of the attachment</div>
+                <div style="margin-top:7px">Business Ops.pdf</div>
+                <span flex></span>
+                <div style="margin-top:7px; font-size:12px; color:gray">By: M Usman Saeed</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div layout="row" flex>
+                <mat-icon mat-list-icon>attachment</mat-icon>
+                <div flex="30" style="margin-top:7px">Title of the attachment</div>
+                <div style="margin-top:7px">Business Ops.pdf</div>
+                <span flex></span>
+                <div style="margin-top:7px; font-size:12px; color:gray">By: M Usman Saeed</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div layout="row" flex>
+                <mat-icon mat-list-icon>attachment</mat-icon>
+                <div flex="30" style="margin-top:7px">Title of the attachment</div>
+                <div style="margin-top:7px">Business Ops.pdf</div>
+                <span flex></span>
+                <div style="margin-top:7px; font-size:12px; color:gray">By: M Usman Saeed</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div layout="row" flex>
+                <mat-icon mat-list-icon>attachment</mat-icon>
+                <div flex="30" style="margin-top:7px">Title of the attachment</div>
+                <div style="margin-top:7px">Business Ops.pdf</div>
+                <span flex></span>
+                <div style="margin-top:7px; font-size:12px; color:gray">By: M Usman Saeed</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div layout="row" flex>
+                <span flex></span>
+                <mat-icon mat-list-icon>autorenew</mat-icon>
+                <span flex></span>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+    </mat-list>
+</div>

@@ -1,0 +1,25 @@
+<div class="modal-close-btn"><mat-icon (click)="close()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>{{formTitle}}</h4></div>
+  <form *ngIf="listForm && ws" [formGroup]="listForm" (ngSubmit)="save(listForm.value, listForm.valid)" id="add-ws-form" class="add-form form-content">
+    <div class="form-content">
+      <mat-form-field class="input-wrapper">
+        <input matInput type="text" formControlName="name" placeholder="Title" required="true" maxlength="100" autocomplete="off"/>
+        <mat-error *ngIf="listForm.controls.name.valid || (listForm.controls.name.pristine && !submitted)">
+          <validation-error [control]="listForm.controls.name" [error]="''" [label]="componentLabels.name"></validation-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-radio-group formControlName="visibility" [(ngModel)]="defaultVisibiliy.value">
+        <label> Visibility </label>
+        <mat-radio-button value="Public" selected>Public</mat-radio-button>
+        <mat-radio-button value="Private">Private</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="modal-btns">
+      <button mat-raised-button color=primary class="primary" id="save-btn" [disabled]="!listForm.valid" type="submit">Save</button>
+      <button mat-raised-button class="default-btn" type="button" (click)="close()">Close</button>
+    </div>
+  </form>
+</div>

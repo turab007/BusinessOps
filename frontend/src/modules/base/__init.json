@@ -1,0 +1,20 @@
+{
+    "name": "Base Module",
+    "version" : "0.1",
+    "summary": "Basic structure, login page and dashboard",
+    "description": "Basic structure, login page and dashboard",
+    "author": "Author Name",
+    "website": "http://www.nextbridge.pk",
+    "category": "ERP",
+    "auto_enable": true,
+    "depends": [
+        "hr",
+        "payroll"
+    ],
+    "someKey": [],
+    "data": [
+        "security/security.json",
+        "security/ir.model.access.csv"
+    ],
+    "demo": []
+}

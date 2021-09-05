@@ -1,0 +1,103 @@
+<td-layout-manage-list #manageList 
+    [opened]="media.registerQuery('gt-sm') | async" 
+   >
+    <mat-toolbar td-sidenav-content>
+        <span>Product Name</span>
+    </mat-toolbar>
+    <mat-nav-list td-sidenav-content>
+        <a mat-list-item mat-ripple class="block relative" (click)="!media.query('gt-sm') && manageList.close()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/product']">
+            <mat-icon mat-list-icon>dashboard</mat-icon>
+            Dashboard
+        </a>
+        <a mat-list-item mat-ripple class="block relative" (click)="!media.query('gt-sm') && manageList.close()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact:true}" [routerLink]="['stats']">
+            <mat-icon mat-list-icon>insert_chart</mat-icon>
+            Stats
+        </a>
+        <a mat-list-item mat-ripple class="block relative" (click)="!media.query('gt-sm') && manageList.close()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact:true}" [routerLink]="['features']">
+            <mat-icon mat-list-icon>star</mat-icon>
+            Features
+        </a>
+        <a mat-list-item (click)="!media.query('gt-sm') && manageList.close()" mat-ripple class="block relative">
+            <mat-icon mat-list-icon>people</mat-icon>
+            Customers
+        </a>
+
+    </mat-nav-list>
+    <div class="mat-content">
+        <mat-card class="user-card">
+            <mat-card-header>
+                <mat-card-title>Users</mat-card-title>
+                <mat-card-subtitle></mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm" *ngIf="filteredData">
+                    <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+                <span class="mat-title">Search</span>
+                    </span>
+
+                    <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)"
+                        flex>
+                    </td-search-box>
+                </div>
+
+                <mat-divider></mat-divider>
+                <table td-data-table #dataTable>
+                    <th td-data-table-column *ngFor="let column of columns" [numeric]="column.numeric" [sortable]="true" [sortOrder]="columnSortOrders[column.name]"
+                        (sortChange)="sort($event,column.name)">
+                        {{column.label}}
+                    </th>
+                    <th td-data-table-column></th>
+
+                    <tbody>
+                        <tr td-data-table-row *ngFor="let row of filteredData">
+
+                            <td td-data-table-cell *ngFor="let column of columns" [numeric]="column.numeric">
+                                {{column.format ? column.format(row[column.name]) : row[column.name]}}
+                            </td>
+                            <td td-data-table-cell style="text-align: center;">
+
+                                <mat-list-item>
+                                    <span>
+                                <button mat-icon-button [mat-menu-trigger-for]="menu">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu x-position="before" #menu="matMenu">
+                                
+                                    <a [routerLink]="['/settings/users/',row['_id']]" mat-menu-item><mat-icon>visibility</mat-icon>View</a>
+                                    <a [routerLink]="['/settings/users/update',row['_id']]" mat-menu-item><mat-icon>update</mat-icon>Update</a>
+                                    <button  color="accent"  mat-menu-item (click)="deleteRecord(row)">
+                                        <mat-icon>delete</mat-icon>Delete
+                                    </button>
+
+                                </mat-menu>
+                            </span>
+                                </mat-list-item>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="mat-padding" *ngIf="!filteredData" layout="row" layout-align="center center">
+                    <h3>No results to display.</h3>
+                </div>
+                <td-paging-bar #pagingBar [pageSize]="[20]" [total]="filteredTotal" (change)="page($event)">
+                    <span td-paging-bar-label hide-xs>Row per page:</span> {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+                </td-paging-bar>
+            </mat-card-content>
+            <mat-card-actions>
+                <!--TODO : proper css managment -->
+                <a [routerLink]="['/settings/users/create']">
+                    <button mat-mini-fab color="accent" class="add-button-position mat-warn">
+                <mat-icon>add</mat-icon>
+        </button>
+                </a>
+            </mat-card-actions>
+        </mat-card>
+
+
+    </div>
+
+</td-layout-manage-list>

@@ -1,0 +1,17 @@
+.setting-wrapper
+{
+    display: none;
+}
+
+.listDiv:hover > .setting-wrapper
+{
+    display: initial;
+}
+
+.itemDone{
+    text-decoration:line-through;
+    color: grey;
+    /* width: 65%; */
+}
+
+

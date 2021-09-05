@@ -1,0 +1,61 @@
+<div class="modal-close-btn"><mat-icon (click)="close()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>Group Spaces</h4></div>
+  <div [ngClass]="{'dashboard-card':groupSpaces.length<5, 'dashboard-card layoutrow':'!groupSpaces.length<5'}">
+    <ng-container *ngIf="groupSpaces.length>1">
+      <ng-container *ngFor="let ws of groupSpaces; let i = index"  >
+        <div *ngIf="ws.space_type!='Personal'" class="card-wrapper">
+          <div class="cardBox">
+            <div class="tag_added" matTooltip="Already added" *ngIf="ws.is_active">
+              <span>added</span>
+            </div>
+
+            <div class="card-title">
+              <span>{{ws.name}}</span><br/>
+            </div>
+
+            <div class="card-desc" >
+              <span *ngIf="ws.description">{{ws.description}}</span><br/>
+            </div>
+
+            <div class="card-summary">
+               <div class="contentholder">
+                  <strong>Lists:</strong>
+                  <span>{{ws.lists_count}} </span>
+              </div>
+              <div class="contentholder text-right">
+                  <strong>Groups:</strong>
+                  <span>{{ws.groups_count}} </span>
+              </div>
+              <div class="contentholder">
+                  <strong>People:</strong>
+                  <span>{{ws.users_count}} </span>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <div class="ws-initials" *ngIf="ws.created_by" [routerLink]="['/workspace/',ws._id]">
+                <span class="userlabel" matTooltip="Created by: {{ws.created_by.name}}" [style.background]="ws.bg_color">{{ws.created_by.initials}}</span>
+              </div>
+
+              <div class="btn-actions" id="ws-actions">
+                <button mat-icon-button class="ws-action-btn" (click)="toggleWorkSpace(ws,'deactivated')" *ngIf="ws.is_active">
+                  <mat-icon class="ws-action-icn" matTooltip="Deactivate">clear</mat-icon>
+                </button>
+                <button mat-icon-button class="ws-action-btn" (click)="toggleWorkSpace(ws,'activated')" *ngIf="!ws.is_active">
+                  <mat-icon class="ws-action-icn" matTooltip="Activate">add</mat-icon>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<div *ngIf="groupSpaces.length==1"  id="emptyGroupSpace"  class="no-record-wrapper">
+  <div class="no-record">No GroupSpaces added yet!</div>
+</div>
+

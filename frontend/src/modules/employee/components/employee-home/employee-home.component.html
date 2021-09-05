@@ -1,0 +1,58 @@
+<mat-card fxLayout="column" fxLayoutAlign="start stretch" class="main-card">
+
+  <mat-card-header>
+    <mat-card-title>Employee Detail</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content fxLayout="column" fxLayoutAlign="start stretch" class="main-card">
+
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+
+      <div fxFlex="15">
+        <app-employee-personal-info [employee]="employee"> </app-employee-personal-info>
+
+      </div>
+
+      <div fxFlex>
+        <p>
+          <mat-tab-group *ngIf="employee">
+
+            <!-- GITHUB TAB -->
+            <mat-tab>
+              <ng-template mat-tab-label>
+                GitHub
+                <mat-icon>
+                  <img src="../../../../assets/icons/github.svg" class="tabIcon">
+                </mat-icon>
+              </ng-template>
+              <app-employee-github [employee]="employee"></app-employee-github>
+            </mat-tab>
+
+            <!-- GITLAB TAB -->
+            <mat-tab>
+              <ng-template mat-tab-label>
+                GitLab
+                <mat-icon>
+                  <img src="../../../../assets/icons/gitlab.svg" class="tabIcon">
+                </mat-icon>
+              </ng-template>
+              <app-employee-gitlab [employee]="employee"></app-employee-gitlab>
+            </mat-tab>
+
+          </mat-tab-group>
+        </p>
+
+
+      </div>
+
+      <div fxFlex="25">
+        <!-- <p>
+            employee works!
+          </p> -->
+
+
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,118 @@
+<ng-template tdLoading="overlayStarSyntax">
+    <mat-card class="mailServer-card">
+        <mat-card-header>
+            <mat-card-title>
+                {{pageTitle}}
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+
+            <div td-toolbar-content layout="row" layout-align="center center" flex>
+                <span flex></span>
+                <mat-list-item>
+                    <span>
+                        <button mat-icon-button [mat-menu-trigger-for]="menu" style="margin-top:3px;">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu x-position="before" #menu="matMenu">
+                            <a [routerLink]="['/settings/mail-servers/'+ 'test-mail']" mat-menu-item>
+                                <mat-icon>email</mat-icon> Test
+                            </a>
+                            <a [routerLink]="['/settings/mail-servers/']" mat-menu-item>
+                                <mat-icon>list</mat-icon> List All
+                            </a>
+                            <a *ngIf="pageAction == 'view' && mailServer" [routerLink]="['/settings/mail-servers/' + 'update',mailServer['_id']]" mat-menu-item>
+                                <mat-icon>edit</mat-icon>Update
+                            </a>
+                            <a *ngIf="pageAction == 'update' && mailServer" [routerLink]="['/settings/mail-servers/', mailServer['_id']]" mat-menu-item>
+                                <mat-icon>visibility</mat-icon> View
+                            </a>
+                           
+                        </mat-menu>
+                    </span>
+                </mat-list-item>
+            </div>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <form [formGroup]="mailServerForm" novalidate (ngSubmit)="save(mailServerForm.value, mailServerForm.valid)">
+            <mat-card-content>
+
+                <!-- We'll add our form controls here -->
+                <div layout="row" layout-margin>
+                    <mat-slide-toggle [checked]="mailServerForm.controls.is_gmail.value" formControlName="is_gmail" (change)="verifyGmailBased()">Gmail</mat-slide-toggle>
+                </div>
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+
+                        <input matInput type="text" formControlName="host" [placeholder]="componentLabels.host" validate-onblur>
+                        <mat-error *ngIf="mailServerForm.controls.host.valid || (mailServerForm.controls.host.pristine && !submitted)">
+                            <validation-error [control]="mailServerForm.controls.host" [error]="''" [label]="componentLabels.host">
+
+                            </validation-error>
+
+                        </mat-error>
+                    </mat-form-field>
+
+
+                </div>
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+
+                        <input matInput type="text" formControlName="port" [placeholder]="componentLabels.port" validate-onblur>
+                        <mat-error *ngIf="mailServerForm.controls.port.valid || (mailServerForm.controls.port.pristine && !submitted)">
+                            <validation-error [control]="mailServerForm.controls.port" [error]="''" [label]="componentLabels.port">
+
+                            </validation-error>
+
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+
+                        <input matInput required type="text" formControlName="user_name" [placeholder]="componentLabels.user_name" validate-onblur>
+                        <mat-error *ngIf="mailServerForm.controls.user_name.valid || (mailServerForm.controls.user_name.pristine && !submitted)">
+                            <validation-error [control]="mailServerForm.controls.user_name" [error]="''" [label]="componentLabels.user_name">
+
+                            </validation-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div layout="row" layout-margin>
+                    <mat-form-field flex="75">
+                        <input matInput required [type]="showPassword.checked ? 'text' : 'password'" formControlName="password" [placeholder]="componentLabels.password"
+                            validate-onblur>
+                        <mat-error *ngIf="mailServerForm.controls.password.valid || (mailServerForm.controls.password.pristine && !submitted)">
+                            <validation-error [control]="mailServerForm.controls.password" [error]="''" [label]="componentLabels.password">
+                            </validation-error>
+                        </mat-error>
+
+                    </mat-form-field>
+                    <mat-checkbox #showPassword flex>Show</mat-checkbox>
+                </div>
+
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+                        <input matInput type="text" formControlName="description" [placeholder]="componentLabels.description" validate-onblur>
+
+                        <mat-error *ngIf="mailServerForm.controls.description.valid || (mailServerForm.controls.description.pristine && !submitted)">
+                            <validation-error [control]="mailServerForm.controls.description" [error]="''" [label]="componentLabels.description">
+
+                            </validation-error>
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+
+            </mat-card-content>
+            <div *ngIf="editMode && editMode == true">
+                <mat-card-actions>
+                    <button type="submit" mat-raised-button color="primary" [disabled]="!mailServerForm.valid">Save</button>
+                    <a mat-button class="tc-grey-600" [routerLink]="['/settings/mail-servers/']">Cancel</a>
+                </mat-card-actions>
+            </div>
+        </form>
+    </mat-card>
+
+
+</ng-template>

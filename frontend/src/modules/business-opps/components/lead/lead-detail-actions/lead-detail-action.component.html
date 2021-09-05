@@ -1,0 +1,258 @@
+<div class="mat-content" class="inset">
+    <div layout-gt-xs="row">
+        <div flex-gt-xs="25">
+            <td-expansion-panel label="Lead Descripion" [disabled]="false" class="full">
+                <ng-template td-expansion-panel-label layout="row">
+                    <div layout="row">
+                        <span flex>
+                            <mat-icon>description</mat-icon>
+                            <span>Lead Description</span>
+                        </span>
+                        <span flex></span>
+                        <span *ngIf="lead">
+                            <a [routerLink]="['/business-opps/leads/update',lead._id]">
+                                <mat-icon>edit</mat-icon>
+                            </a>
+                        </span>
+                    </div>
+                </ng-template>
+
+                <td-expansion-summary>
+                    <div class="mat-padding">
+                        <mat-card *ngIf="lead">
+                            <mat-card-content>
+                                <h3 class=" _id">{{lead.name}}</h3>
+                                <p mat-line *ngIf="lead.description">
+                                    <span>{{lead.description}}</span>
+                                </p>
+                                <p mat-line *ngIf="lead.time_zone">
+                                    <span>{{lead.time_zone}}</span>
+                                </p>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </td-expansion-summary>
+            </td-expansion-panel>
+            <mat-divider></mat-divider>
+            <td-expansion-panel label="Level" [disabled]="false" class="full">
+                <ng-template td-expansion-panel-label>
+                    <mat-icon>toc</mat-icon>
+                    <span>Level</span>
+                </ng-template>
+                <td-expansion-summary>
+                    <div class="mat-padding">
+                        <mat-card *ngIf="lead && businessGroupStatuses">
+                            <mat-card-content>
+                                <mat-form-field>
+                                    
+                                        <mat-select placeholder="Select Level" [(ngModel)]="lead.status" [style.width]="'100%'">
+                                            <mat-option *ngFor="let status of businessGroupStatuses" [value]="status._id">
+                                                {{ status.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                    
+                                </mat-form-field>
+                            </mat-card-content>
+                        </mat-card>
+
+                    </div>
+                </td-expansion-summary>
+            </td-expansion-panel>
+            <mat-divider></mat-divider>
+            <td-expansion-panel label="Organization" [disabled]="false" class="full">
+                <ng-template td-expansion-panel-label>
+                    <mat-icon>business</mat-icon>
+                    <span>Organization</span>
+                </ng-template>
+                <td-expansion-summary>
+                    <div class="mat-padding">
+                        <mat-card *ngIf="lead">
+                            <mat-card-content>
+                                <h3 class=" _id" *ngIf="lead.company_name">{{lead.company_name}}</h3>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </td-expansion-summary>
+            </td-expansion-panel>
+            <mat-divider></mat-divider>
+            <td-expansion-panel label="Contact Person" [disabled]="false" class="full">
+                <ng-template td-expansion-panel-label>
+                    <div layout="row">
+                        <span flex>
+                            <mat-icon>person</mat-icon>
+                            <span>Contact Person</span>
+                        </span>
+                        <span flex></span>
+                        <span *ngIf="lead && lead.contact_type=='existing'">
+                            <a [routerLink]="['/business-opps/contacts/update',lead.contact_id]">
+                                <mat-icon>edit</mat-icon>
+                            </a>
+                        </span>
+                    </div>
+
+                </ng-template>
+                <td-expansion-summary>
+                    <div class="mat-padding">
+                        <mat-card *ngIf="lead && lead.relatedContact">
+                            <mat-card-content>
+                                <h3 class=" _id" *ngIf="lead.relatedContact">{{lead.relatedContact.name}}</h3>
+                                <p mat-line *ngIf="lead.relatedContact.phone">
+                                    <span>{{lead.relatedContact.phone}}</span>
+                                </p>
+                                <p mat-line *ngIf="lead.relatedContact.skype_id">
+                                    <span>{{lead.relatedContact.skype_id}}</span>
+                                </p>
+                                <p mat-line *ngIf="lead.relatedContact.email">
+                                    <span>{{lead.relatedContact.email}}</span>
+                                </p>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </td-expansion-summary>
+            </td-expansion-panel>
+            <mat-divider></mat-divider>
+            <td-expansion-panel label="Intersted In" [disabled]="false" class="full">
+                <ng-template td-expansion-panel-label>
+                    <div layout="row">
+                        <span flex>
+                            <mat-icon>list</mat-icon>
+                            <span>Intersted In</span>
+                        </span>
+                        <span flex></span>
+                        <span *ngIf="lead">
+                            <a (click)="openTechnologiesDialog(lead._id)">
+                                <mat-icon>edit</mat-icon>
+                            </a>
+                        </span>
+                    </div>
+
+                </ng-template>
+                <td-expansion-summary>
+                    <div class="mat-padding">
+                        <mat-card *ngIf="lead && lead.relatedTechnologies">
+                            <mat-card-content>
+                                <mat-list>
+                                    <mat-list-item *ngFor="let interest of lead.relatedTechnologies ">{{interest.name}}</mat-list-item>
+                                </mat-list>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </td-expansion-summary>
+            </td-expansion-panel>
+            <mat-divider></mat-divider>
+            <td-expansion-panel label="Participants" [disabled]="false" class="full">
+                <ng-template td-expansion-panel-label>
+                    <div layout="row">
+                        <span flex>
+                            <mat-icon>account_box</mat-icon>
+                            <span>Participants</span>
+                        </span>
+                        <span flex></span>
+                        <span *ngIf="lead">
+                            <a (click)="openParticpantsDialog(lead._id)">
+                                <mat-icon>edit</mat-icon>
+                            </a>
+                        </span>
+                    </div>
+                </ng-template>
+                <td-expansion-summary>
+                    <div class="mat-padding">
+                        <mat-card *ngIf="lead && lead.relatedParticipants">
+                            <mat-card-content>
+                                <mat-list>
+                                    <mat-list-item *ngFor="let participant of lead.relatedParticipants ">{{participant.name}}</mat-list-item>
+                                </mat-list>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </td-expansion-summary>
+            </td-expansion-panel>
+            <mat-divider></mat-divider>
+            <td-expansion-panel label="Overview" [disabled]="false" class="full">
+                <ng-template td-expansion-panel-label>
+                    <mat-icon>visibility</mat-icon>
+                    <span>Overview</span>
+                </ng-template>
+                <td-expansion-summary>
+
+                    <div class="mat-padding">
+                        <mat-card *ngIf="lead">
+                            <mat-card-content>
+                                <p mat-line>Lead Ago: {{lead.createdAgo}}</p>
+                                <p mat-line>
+                                    Created By:
+                                    <span></span>
+                                </p>
+                                <p mat-line>
+                                    Created Date:
+                                    <span>{{lead.createdDate}}</span>
+                                </p>
+                                <p mat-line *ngIf="lead.is_active">
+                                    Status:
+                                    <span>Active</span>
+                                </p>
+                                <p mat-line *ngIf="!lead.is_active">
+                                    Status:
+                                    <span>In-Active</span>
+                                </p>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </td-expansion-summary>
+            </td-expansion-panel>
+            <mat-divider></mat-divider>
+        </div>
+        <div flex-gt-xs="75">
+
+
+
+            <mat-card style="margin-top:0px">
+                <mat-card-content>
+                    <mat-tab-group flex>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div layout="row">
+                                    <mat-icon style="margin:12px 5px 0px 0px">event_note</mat-icon>
+                                    <div>Notes</div>
+                                </div>
+                            </ng-template>
+                            <lead-notes></lead-notes>
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div layout="row">
+                                    <mat-icon style="margin:12px 5px 0px 0px">attachment</mat-icon>
+                                    <div>Attachments</div>
+                                </div>
+                            </ng-template>
+                            <lead-attachments></lead-attachments>
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div layout="row">
+                                    <mat-icon style="margin:12px 5px 0px 0px">event_available</mat-icon>
+                                    <div>Actions</div>
+                                </div>
+                            </ng-template>
+                            <h1>Actions</h1>
+                            <p>...</p>
+                        </mat-tab>
+                        <mat-tab *ngIf="lead" flex>
+                            <ng-template mat-tab-label>
+                                <nav mat-tab-nav-bar>
+                                    <div layout="row">
+                                        <a (click)="openAccountDialog(lead._id)" mat-tab-link>
+                                            <mat-icon>account_box</mat-icon>
+                                            Convert To Account
+                                        </a>
+                                    </div>
+                                </nav>
+                            </ng-template>
+                        </mat-tab>
+                    </mat-tab-group>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

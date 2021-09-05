@@ -1,0 +1,26 @@
+<div class="modal-close-btn"><mat-icon (click)="close()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>Copy</h4></div>
+  <form *ngIf="copyForm" [formGroup]="copyForm" (ngSubmit)="save()" class="form-content">
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Action"   formControlName="action">
+        <mat-option *ngFor="let action of actions" [value]="action"  >
+          {{action}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="GroupSpace"   formControlName="groupSpace">
+        <mat-option *ngFor="let workspace of workSpaces" [value]="workspace" >
+          {{workspace.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <div class="modal-btns">
+      <button mat-raised-button color=primary class="primary" id="save-btn">Save</button>
+      <button mat-raised-button class="default-btn" type="button" (click)="close()">Close</button>
+    </div>
+  </form>
+</div>

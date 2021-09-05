@@ -1,0 +1,29 @@
+<mat-card class="user-card">
+
+    <mat-card-header>
+        <mat-card-title>List</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <div td-toolbar-content layout="row" layout-align="center center" flex>
+            <span flex></span>
+            <a matTooltip="Create" [routerLink]="['/settings/tags/create']" mat-icon-button>
+                <mat-icon>add</mat-icon>
+            </a>
+        </div>
+    </mat-card-header>
+    <mat-card-content>
+        <datatable *ngIf="tags" 
+                [dataList]="tags" 
+                [columns]="dtColumns" 
+                [actionButtons]="actionButtons"
+                [totalRecords]="totalRecords" 
+                [sortBy]="'name'"
+                (deleteRecord)="deleteRecord($event)"
+                (nextPage)="nextPage($event)"
+                (filterRecords)="filterRecords($event)"></datatable>
+    </mat-card-content>
+
+</mat-card>
+
+<a mat-fab color="accent" class="mat-fab-bottom-right fixed" [routerLink]="['/settings/tags/create']">
+    <mat-icon>add</mat-icon>
+</a>

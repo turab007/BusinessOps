@@ -1,0 +1,11 @@
+<ng-template let-item let-last="last" ngFor [ngForOf]="routes">
+    <a *ifPermitted=item.ifPermitted mat-list-item [routerLink]="[item.route]" (click)="closeLayout()">
+        <mat-icon>{{item.icon}}</mat-icon>{{item.title}}
+    </a>
+</ng-template>
+
+<div style="position: fixed; bottom: 5px; width: 100%;">
+    <a mat-list-item [routerLink]="['/settings/releases']" (click)="closeLayout()">
+        <mat-icon>blur_linear</mat-icon>Releases
+    </a>
+</div>

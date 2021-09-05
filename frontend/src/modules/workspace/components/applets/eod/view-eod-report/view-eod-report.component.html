@@ -1,0 +1,18 @@
+<div class="modal-close-btn"><mat-icon (click)="dialogRef.close()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>View EOD-Report</h4></div>
+  <mat-form-field class="input-wrapper">
+    <input matInput [matDatepicker]="reportDate" [value]="eodReport.date" disabled>
+    <!-- <button matSuffix [matDatepickerToggle]="reportDate"></button> -->
+    <mat-datepicker-toggle matSuffix [for]="reportDate"></mat-datepicker-toggle>
+  </mat-form-field>
+  <mat-datepicker #reportDate></mat-datepicker>
+
+  <div class="editor-wrapper">
+    <ckeditor [config]="ckEditorConfig" [readonly]="true" [value]="eodReport.report" debounce="500"></ckeditor>
+  </div>
+
+  <div class="modal-btns">
+    <button mat-raised-button class="default-btn" (click)="dialogRef.close()">Close </button>
+  </div>
+</div>

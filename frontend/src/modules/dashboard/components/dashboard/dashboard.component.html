@@ -1,0 +1,75 @@
+<div id="main-dashboard-container" class="mainDashboard">
+  <div class="btnSectiongroup">
+    <button mat-raised-button color="primary" fxFlex="none" fxFlex.xs="80" class="dashboard-action-btn" class.xs="mobile-btn"
+      (click)="addGroupSpace()">
+      Create GroupSpace
+    </button>
+    <button *ngIf="workSpaces" mat-raised-button color="primary" fxFlex="none" fxFlex.xs="80" class="dashboard-action-btn" class.xs="mobile-btn"
+      (click)="manageGroupSpaces()">
+      Browse GroupSpace
+    </button>
+    <button *ngIf="workSpaces && permission=='admin'" mat-raised-button color="primary" fxFlex="none" fxFlex.xs="80" class="dashboard-action-btn"
+      class.xs="mobile-btn" (click)="manageEmployees()">
+      Browse Employees
+    </button>
+  </div>
+
+  <div *ngIf="workSpaces && appletCount" [ngClass]="{'dashboard-card':workSpaces.length<5, 'dashboard-card layoutrow':'!workSpaces.length<5'}">
+    <ng-container *ngFor="let ws of workSpaces; let i = index">
+      <div *ngIf="ws.is_active" class="card-wrapper">
+        <mat-card class="cardBox" draggable="true" (dragenter)="dragEnter(i,$event)" (dragstart)="dragStart(i,$event)" (click)="navigate('/workspace/',ws._id)">
+
+          <div class="card-title">
+            <span>{{ws.name}}</span>
+          </div>
+
+          <div class="card-desc">
+            <span *ngIf="ws.description">{{ws.description}}</span>
+          </div>
+
+          <span *ngFor="let counter of appletCount">
+
+
+            <div class="card-summary" *ngIf="counter._id==ws._id">
+              <div class="contentholder">
+                <strong>Lists:</strong>
+                <span>{{counter.count.listCount}} </span>
+              </div>
+              <div class="contentholder">
+                <strong>Eod Reports:</strong>
+                <span>{{counter.count.eodCount}} </span>
+              </div>
+              <div class="contentholder">
+                <strong>Tasks:</strong>
+                <span>{{counter.count.taskGroupCount}} </span>
+              </div>
+              <div class="contentholder">
+                <strong>Approvals:</strong>
+                <span>{{counter.count.approvalCount}} </span>
+              </div>
+              <!-- <div class="contentholder">
+              <strong>People:</strong>
+              <span>{{ws.users_count}} </span>
+            </div> -->
+            </div>
+          </span>
+          <div class="card-footer">
+            <div class="ws-initials" *ngIf="ws.created_by">
+              <span class="userlabel" matTooltip="Created by: {{ws.created_by.name}}" [style.background]="ws.bg_color">{{ws.created_by.initials}}</span>
+            </div>
+
+            <div class="btn-actions" id="ws-actions" *ngIf="current_user == ws.created_by.user_id">
+              <button mat-icon-button class="ws-action-btn" (click)="updateGroupSpace(ws,$event)" matTooltip="update" *ngIf="!ws.read_only">
+                <mat-icon class="ws-action-icn">edit</mat-icon>
+              </button>
+              <button mat-icon-button class="ws-action-btn" (click)="removeWorkspace(ws,$event)" matTooltip="remove" *ngIf="ws.space_type != 'Personal'">
+                <mat-icon class="ws-action-icn">clear</mat-icon>
+              </button>
+            </div>
+
+          </div>
+        </mat-card>
+      </div>
+    </ng-container>
+  </div>
+</div>

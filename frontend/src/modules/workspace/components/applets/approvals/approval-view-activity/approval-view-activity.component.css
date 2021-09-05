@@ -1,0 +1,7 @@
+.sidebar-heading{color: #00bff3;font-weight: 400; margin-bottom: 20px;}
+.activitySection{max-height: 190px; overflow-y:auto; height:230px;}
+.activitySection .log-list{display: flex; align-items: center; justify-content: space-between; padding: 0 5px 10px; margin-bottom: 10px; border-bottom: 1px solid #e0e0e0;}
+.activitySection .log-list .activity{color: #7d7d7d; font-weight: 300;max-width: 260px; word-wrap: break-word;}
+.activitySection .log-list .activity-time{color: #7d7d7d; font-weight: 300; font-size: 12px;}
+
+.activitySection::-webkit-scrollbar { display: none; }

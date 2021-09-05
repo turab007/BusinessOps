@@ -1,0 +1,27 @@
+<div *ngIf="listItem">
+    <div class="listDiv">
+        <div class="input-wrapper" *ngIf="listItem.is_editAble" [ngClass]="{'itemDone': listItem.done, 'itemUnDone':!listItem.done}">
+          <input #itemEdit contenteditable="true" (keyup.enter)="updateItem(list)" [(ngModel)]="listItem.name">
+          <mat-icon (click)="toogleEditable(item)">done </mat-icon>
+        </div>
+        <div *ngIf="!listItem.is_editAble" [ngClass]="{'itemDone': listItem.done, 'itemUnDone':!listItem.done}" (keyup.enter)="updateItem(listItem,list)"
+          (click)="toogleEditable()">
+          <li> {{listItem.name}}</li>
+        </div>
+
+        <div class="setting-wrapper">
+          <div class="itemSettingDiv">
+            <span *ngIf="!listItem.done" (click)="doneItem()" class="listSetting">
+              <mat-icon class="listSetting" matTooltip="Done">check_circle</mat-icon>
+            </span>
+            <span *ngIf="listItem.done" (click)="doneItem()" class="listSetting">
+              <mat-icon class="listSetting" matTooltip="UnDone">cancel</mat-icon>
+            </span>
+            <span class="listSetting" (click)="deleteItem()">
+              <mat-icon class="listSetting" matTooltip="Delete"> delete</mat-icon>
+            </span>
+          </div>
+       
+        </div>
+      </div>
+</div>

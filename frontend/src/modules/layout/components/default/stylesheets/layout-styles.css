@@ -1,0 +1,16 @@
+/*--header styles--*/
+.header-toolbar-wrapper{background-color: #f2f2f2 !important;}
+.toolbar-wrapper{padding-left:15px; padding-right: 15px; width: 100%; display: flex; justify-content: space-between; align-items: center;}
+
+.header-toolbar{display: flex; align-items: center; justify-content: space-between; background-color: #00bff3 !important; color: #fff; width:100%; padding:8px 0;}
+.header-toolbar .menu-items{display: flex; align-items: center; justify-content: space-between;}
+.logoSection{display: flex; align-items: center; justify-content: space-between;}
+.logoSection .logo{color: #fff; padding-right: 115px;}
+.logoSection a:hover,.header-toolbar .logo a:focus{color: #fff; text-decoration: none;}
+.breadcrumb-wrapper .breadcrumb-content{ display: flex; align-items: center;}
+.breadcrumb-wrapper .breadcrumb-content span{padding: 0 2px; display: inline-block; vertical-align: middle;}
+.breadcrumb-wrapper .breadcrumb-content span a{color: #fff; font-size: 12px; font-weight: 600;}
+.breadcrumb-wrapper .breadcrumb-content .currentPage{font-weight: 400; color: #fff; font-size: 12px;}
+.breadcrumb-wrapper .breadcrumb-content .separater{font-weight: 400;}
+
+.user-menu .mat-button-wrapper{transition: opacity .4s; -webkit-transition: opacity .4s; display: block; width: 35px;height: 35px; border-radius: 100%; padding: 0; text-align: center; font-size: 14px; font-weight: 600; white-space: nowrap;cursor: pointer;color: #000 !important;}

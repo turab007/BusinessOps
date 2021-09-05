@@ -1,0 +1,46 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <div>
+                Permissions
+            </div>
+        </mat-card-title>
+        <mat-card-subtitle>
+
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <div>
+            <div fxLayout="row" fxFlex="100" *ngIf="modulePermissions && modulePermissions.length">
+
+                <div class="blocks" fxFlex="20">
+                    <mat-list>
+                        <mat-list-item *ngFor="let permission of modulePermissions" (click)="loadControllerActions(permission._id)">
+                            {{permission.title}}
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+
+                <div class="blocks" fxFlex>
+                    <div *ngIf="modulePermissionChildren">
+                        <div *ngFor="let pc of modulePermissionChildren">
+
+                            <div *ngIf="pc.level < 5" [setDepth]="pc.level" style="margin-top:5px;">
+
+                                <mat-checkbox (change)="emitPermission(pc._id)" [checked]="pc.isAssigned" [disabled]="disabled">
+                                    {{pc.title}}
+                                </mat-checkbox>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </mat-card-content>
+
+</mat-card>

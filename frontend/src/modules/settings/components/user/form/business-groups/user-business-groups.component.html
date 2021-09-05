@@ -1,0 +1,4 @@
+<label class="custom_label">Business Groups</label>
+<td-chips *ngIf="businessGroupNames" [items]="businessGroupNames" [(ngModel)]="userBusinessGroupNames" placeholder="Enter autocomplete strings" requireMatch
+            (add)="emitBusinessGroup()" (remove)="emitBusinessGroup()" [readOnly]="readOnly">
+</td-chips>

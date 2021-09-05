@@ -1,0 +1,51 @@
+<div class="task-view-wrapper">
+  <mat-card *ngIf="task && taskGroup">
+    <!-- main description styles -->
+    <div class="task-detail">
+      <div class="card-title">
+        <div class="card-title-view">
+          <div *ngIf="!editTitle" class="title-text">{{task.name}}</div>
+          <button *ngIf="!editTitle" mat-icon-button class="edit-btn" matTooltip="edit" (click)="editTask()">
+            <mat-icon>mode_edit</mat-icon>
+          </button>
+        </div>
+      </div>
+     
+      <div class="sub-details">
+        <div class="leftcontent">
+          <div  *ngIf="task && task.assigned_to">
+            <div class="intails" *ngIf="assigned_to">{{assigned_to.initials}}</div>
+          </div>
+          <div class="intails" *ngIf="!assigned_to"></div>
+        </div>
+        <div class="rightcontent">
+          <div class="task-group">
+            <app-task-view-info [task]="task" [taskGroup]="taskGroup"></app-task-view-info>
+          </div>
+        </div>
+      </div>
+      <div class="task-description">
+        <div class="desc-title"><span>Description:</span></div>
+        <div *ngIf="!editDesc && !task.description" class="desc-text">Empty space is so boring... go on be descriptive...</div>
+        <div *ngIf="!editDesc &&  task.description" class="desc-text" [innerHTML]="task.description"></div>
+      </div>
+
+      <!-- task attachment section -->
+      <div class="task-attachment">
+        <app-task-view-attachments [task]="task" [taskGroup]="taskGroup"></app-task-view-attachments>
+      </div>
+    </div>
+
+    <!-- sidebar info  section-->
+    <aside class="sidebar-detail">
+      <!-- comments  section-->
+      <div class="task-comments">
+        <app-task-view-comments [task]="task" [taskGroup]="taskGroup" (refresh)="refreshContent($event)"></app-task-view-comments>
+      </div>
+      <!-- activity section -->
+      <div class="task-activity">
+        <app-task-view-activity [taskId]="task._id" [ws]="ws"> </app-task-view-activity>
+      </div>
+    </aside>
+  </mat-card>
+</div>

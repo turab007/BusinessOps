@@ -1,0 +1,121 @@
+<td-layout #layout class="page-layout">
+    <td-navigation-drawer  [email]="user_id">
+        <mat-nav-list> 
+            <page-nav (closeClicked)='layout.close()'></page-nav>
+        </mat-nav-list>
+        <mat-nav-list td-navigation-drawer-menu>
+            <a mat-list-item (click)="logOut()">
+                <mat-icon>exit_to_app</mat-icon>Sign out</a>
+        </mat-nav-list>
+    </td-navigation-drawer>
+
+    <td-layout-nav class="header-toolbar-wrapper">
+        <div td-toolbar-content class="header-toolbar">
+            <div class="logoSection">
+                <a routerLink="/dashboard" class="logo">Group Captain</a>
+                <div class="breadcrumb-wrapper">
+                    <span *ngIf="menuArr && menuArr.sub_module"></span>
+                    <div *ngIf="breadCrumbs" class="breadcrumb-content">
+                        <div *ngFor="let bc of breadCrumbs; let i = index">
+                            <span *ngIf="bc.url">
+                                <a [routerLink]="[bc.url]">
+                                    {{bc.title}}
+                                </a>
+                            </span>
+                            <span *ngIf="!bc.url" class="currentPage">
+                                {{bc.title}}
+                            </span>
+                            <span *ngIf="i < (breadCrumbs.length - 1)" class="separater">/</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-items">
+                <div class="user-menu">
+                    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+                        <td-notification-count color="accent">
+                            <span class="dropdown-label" *ngIf="loggedInUser" >{{loggedInUser.initials}}</span>
+                        </td-notification-count>
+                    </button>
+                    <mat-menu #userMenu="matMenu" class="user-dropdown">
+                        <td-menu>
+                            <mat-nav-list dense>
+                                <a mat-list-item [routerLink]="['/settings/profile/']">
+                                    <mat-icon mat-list-avatar>account_box</mat-icon>
+                                    <h4 mat-line>
+                                        <span class="text-wrap">View Profile</span>
+                                    </h4>
+                                </a>
+                                <mat-divider></mat-divider>
+                                <a mat-list-item [routerLink]="['/settings/profile/change-password']">
+                                    <mat-icon mat-list-avatar>settings</mat-icon>
+                                    <h4 mat-line>
+                                        <span class="text-wrap">Change Password</span>
+                                    </h4>
+                                </a>
+                                <mat-divider></mat-divider>
+                                <a mat-list-item (click)="logOut()">
+                                    <mat-icon mat-list-avatar>exit_to_app</mat-icon>
+                                    <h4 mat-line>
+                                        <span class="text-wrap">Sign out</span>
+                                    </h4>
+                                </a>
+                            </mat-nav-list>
+                        </td-menu>
+                    </mat-menu>
+                </div>
+                <div class="setting-Menu">
+                    <button mat-icon-button [matMenuTriggerFor]="settingMenu">
+                        <td-notification-count color="accent">
+                            <mat-icon>more_vert</mat-icon>
+                        </td-notification-count>
+                    </button>
+                    <mat-menu #settingMenu="matMenu" class="settings-dropdown">
+                        <td-menu>
+                            <mat-nav-list dense>
+                                <a mat-list-item [routerLink]="['/settings/users/']">
+                                    <mat-icon mat-list-avatar>people</mat-icon>
+                                    <h4 mat-line>
+                                        <span class="text-wrap">Users</span>
+                                    </h4>
+                                </a>
+                                <mat-divider></mat-divider>
+                                <a mat-list-item [routerLink]="['/settings/mail-servers']">
+                                    <mat-icon mat-list-avatar>list</mat-icon>
+                                    <h4 mat-line>
+                                        <span class="text-wrap">Mail Server</span>
+                                    </h4>
+                                </a>
+                                <mat-divider></mat-divider>
+                                <a mat-list-item [routerLink]="['/settings/releases']">
+                                    <mat-icon mat-list-avatar>blur_linear</mat-icon>
+                                    <h4 mat-line>
+                                        <span class="text-wrap">Releases</span>
+                                    </h4>
+                                </a>
+                                <mat-divider></mat-divider>
+                                <a mat-list-item [routerLink]="['/settings/permissions']">
+                                    <mat-icon mat-list-avatar>security</mat-icon>
+                                    <h4 mat-line>
+                                        <span class="text-wrap">Permissions</span>
+                                    </h4>
+                                </a>
+                            </mat-nav-list>
+                        </td-menu>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+
+        <div tdMediaToggle="gt-xs" id="main-container">      
+            <!--Router-Outlet loading application here-->
+            <div class="page-wrapper">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+
+
+    </td-layout-nav>
+
+</td-layout>

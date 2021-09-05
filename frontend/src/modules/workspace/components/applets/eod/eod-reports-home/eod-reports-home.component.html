@@ -1,0 +1,32 @@
+<button mat-mini-fab color=primary class="fab-primary-btn" matTooltip="add EOD Report" matTooltipPosition="left" (click)="addEod()"><mat-icon>add</mat-icon></button>
+<div class="page-eod">
+    <mat-card class="search-eod-form">
+        <form [formGroup]="searchForm" (ngSubmit)="search(searchForm.value,searchForm.valid)">
+            <div class="form-content">
+                <div class="form-field">
+                    <mat-form-field class="input-wrapper">
+                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date" (click)="picker.open()" (focus)="picker.open()">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    </mat-form-field>
+                    <mat-datepicker #picker></mat-datepicker>
+                </div>
+
+                <div class="form-field">
+                    <mat-form-field class="input-wrapper">
+                        <input matInput placeholder="Enter name" formControlName="name" [matAutocomplete]="auto">
+                    </mat-form-field>
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let data of filteredData | async " [value]="data">
+                            {{data.fullname}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+                <div class="btn-icons">
+                    <button type="submit"><mat-icon>search</mat-icon></button>
+                    <button type="button" (click)="resetForm()"><mat-icon>clear</mat-icon></button>
+                </div>
+            </div>
+        </form>
+    </mat-card>
+    <app-eod-reports [eodReports]="eodReports" (eodDeleted)="getEodReports()"></app-eod-reports>
+</div>

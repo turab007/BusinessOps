@@ -1,0 +1,72 @@
+<mat-card fxLayout="column" fxLayoutAlign="start stretch" class="main-card">
+
+  <mat-card-header>
+    <mat-card-title>Manage Permissions</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content fxFlex>
+    <div>
+
+      <form [formGroup]="searchRoleForm" (ngSubmit)="searchRolePermissions(searchRoleForm.valid,searchRoleForm.value)">
+        <mat-form-field>
+          <mat-select placeholder="Select role" formControlName="role">
+            <mat-option *ngFor="let role of roles" [value]="role._id">
+              {{ role.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Select Workspace" formControlName="ws">
+            <mat-option *ngFor="let ws of workspaces" [value]="ws._id">
+              {{ ws.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button type="submit">Search</button>
+      </form>
+
+
+      <mat-list>
+
+        <ng-container *ngFor="let perm of allPermission">
+          <div class="approvalRow">
+            <mat-checkbox [checked]="perm.selected" (change)="updatePermission($event.checked,perm.permission)">
+
+              <div>
+                <!-- <div class="approvalName"> {{permission.title}}</div> -->
+
+                <span>Title:
+                  <b>{{perm.permission.title}} &emsp; </b>
+                </span>
+
+                <!-- <div *ngIf="  currentUser && approval.assign_to_user && approval.assign_to_user._id==currentUser._id ">Assigned by: &nbsp; <b>{{approval.assign_to_user.name}} </b> </div> -->
+
+
+                <span>Controller:
+                  <b>{{perm.permission.controller}} &emsp;</b>
+                </span>
+
+                <span>Action:
+                  <b>{{perm.permission.action}} </b> &emsp; </span>
+
+              </div>
+            </mat-checkbox>
+            <!-- <span class="options">
+        <mat-icon mat-button [matMenuTriggerFor]="menu">more_vert</mat-icon>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item fxFlex (click)="deletePermission(perm.permission)">Delete <mat-icon>delete</mat-icon></button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+
+      </span> -->
+          </div>
+
+        </ng-container>
+
+      </mat-list>
+
+    </div>
+  </mat-card-content>
+</mat-card>

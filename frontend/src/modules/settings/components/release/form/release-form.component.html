@@ -1,0 +1,73 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            {{pageTitle}}
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <div td-toolbar-content layout="row" layout-align="center center" flex>
+            <span flex></span>
+            <detail-page-nav [page]="pageAction" [model]="_releaseModel" [url]="'/settings/releases/'" (deleteRecord)="deleteRecord($event)"></detail-page-nav>
+        </div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+
+        <form [formGroup]="fg" novalidate (ngSubmit)="save(fg.value, fg.valid)">
+
+            <div class="form-group">
+
+                <div layout="row" layout-margin>
+                    <mat-form-field flex>
+                        <input required matInput type="text" class="form-control" formControlName="name" placeholder="{{componentLabels.name}}">
+
+                        <mat-error *ngIf="fg.controls.name.valid || (fg.controls.name.pristine && !submitted)">
+                            <validation-error [control]="fg.controls.name" [error]="''" [label]="componentLabels.name">
+
+                            </validation-error>
+
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div layout="row" layout-margin>
+                    <mat-form-field flex>
+                        <input required matInput type="text" class="form-control" formControlName="version" placeholder="{{componentLabels.version}}">
+
+                        <mat-error *ngIf="fg.controls.version.valid || (fg.controls.version.pristine && !submitted)">
+                            <validation-error [control]="fg.controls.version" [error]="''" [label]="componentLabels.version">
+
+                            </validation-error>
+
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <ckeditor formControlName="description" [config]="{uiColor: '#E4E5E4'}" [readonly]="false" 
+                    debounce="500">
+                </ckeditor>
+
+                <!--<div layout="row" layout-margin>
+                    <mat-form-field flex>
+                        <textarea matInput class="form-control" formControlName="description" placeholder="{{componentLabels.description}}" rows="10"></textarea>
+                        <mat-error *ngIf="fg.controls.description.valid || (fg.controls.description.pristine && !submitted)">
+                            <validation-error [control]="fg.controls.description" [error]="''" [label]="componentLabels.description">
+
+                            </validation-error>
+
+                        </mat-error>
+                    </mat-form-field>
+                </div>-->
+            </div>
+
+            <div style="margin-top:30px;" *ngIf="pageAction && pageAction.toString() != 'view'">
+                <mat-card-actions>
+                    <button type="submit" mat-raised-button color="primary" [disabled]="!fg.valid">Save</button>
+
+                    <a mat-button class="tc-grey-600" [routerLink]="['/settings/releases/']">Cancel</a>
+                </mat-card-actions>
+            </div>
+
+        </form>
+    </mat-card-content>
+
+</mat-card>

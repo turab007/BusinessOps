@@ -1,0 +1,18 @@
+<td-chips color="accent"
+          [items]="filteredObjects"
+          [(ngModel)]="objectsModel"
+          [placeholder]="'Enter '+label"
+          (inputChange)="filterObjects($event)"
+          (add)="addEvent($event)"
+          (remove)="removeEvent($event)"
+          [readOnly]="readonly"
+          requireMatch>
+  <ng-template td-chip let-chip="chip">
+    <mat-icon>account_box</mat-icon> {{chip.name}}
+  </ng-template>
+  <ng-template td-autocomplete-option let-option="option">
+    <div layout="row" layout-align="start center">
+      <mat-icon>account_box</mat-icon> {{option.name}}
+    </div>
+  </ng-template>
+</td-chips>

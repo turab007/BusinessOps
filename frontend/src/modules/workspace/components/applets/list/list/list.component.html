@@ -1,0 +1,71 @@
+<button mat-mini-fab color=primary class="fab-primary-btn" (click)="addList()" matTooltip="add list" matTooltipPosition="left">
+  <mat-icon>add</mat-icon>
+</button>
+<div *ngIf="lists && lists.length==0" class="emptybox">
+  <span>There are no lists to display.</span>
+</div>
+
+<ng-container *ngIf="lists && lists.length!=0">
+  <div id="list-container">
+    <mat-card-content>
+      <ng-template tdLoading="overlayStarSyntax">
+        <div class="listSection">
+          <ng-container>
+            <mat-list class="list-wrapper" *ngFor=" let list of lists ;let i=index" draggable="true" (dragenter)="dragEnter(i,$event)"
+              (dragstart)="dragStart(i,$event)" (dragend)="dragEnd(i,$event)">
+              <div class="list-header">
+                <div class="listName" data-id="{{list._id}}">
+                  <span> {{list.name}} </span>
+                </div>
+                <div class="actionbtns">
+                  <div class="iconDiv">
+                    <mat-icon class="settings" matTooltip="List Style" [matMenuTriggerFor]="menu">list </mat-icon>
+                    <mat-icon class="settings" matTooltip="Edit" (click)='updateList(list)'> mode_edit</mat-icon>
+                    <mat-icon class="settings" matTooltip="Delete" (click)="deleteList(list)"> delete</mat-icon>
+                    <mat-icon class="settings" matTooltip="Archive" (click)="archive(list)" *ngIf="!list.archived"> archive</mat-icon>
+                    <mat-icon class="settings" matTooltip="UnArchive" (click)="archive(list)" *ngIf="list.archived"> unarchive</mat-icon>
+                    <mat-icon class="settings" matTooltip="Copy to GroupSpace" (click)="copyList(list)"> content_copy </mat-icon>
+                    <mat-icon class="settings" matTooltip="Share via Email" (click)="share(list)">share </mat-icon>
+                  </div>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="changeListStyle(list,'numbers')">Numbers (1,2,3,4)</button>
+                    <button mat-menu-item (click)="changeListStyle(list,'bullets')">Bullets</button>
+                    <button mat-menu-item (click)="changeListStyle(list,'roman')">Roman (I,II,III,IV)</button>
+                    <button mat-menu-item (click)="changeListStyle(list,'lower alpha')">Lower Aplha (a,b,c,d)</button>
+                    <button mat-menu-item (click)="changeListStyle(list,'none')">None</button>
+                  </mat-menu>
+                </div>
+              </div>
+              <div class="list-content" >
+
+                <ul class="noneListItem" [ngClass]="{'numberList':list.listStyle=='numbers', 'romanList':list.listStyle=='roman','lower-aplha-list':list.listStyle=='lower alpha','bulletList':list.listStyle=='bullets'}">
+
+                  <div  [dragula]='"bag-one"'  [attr.data-id]="list._id" class="group_{{list._id}}" >
+                    
+                    <applet-list-item *ngFor="let item of list.items;let i=index" [attr.data-id]="item._id" [listItem]="item" [ws]="ws" [list]="list"></applet-list-item>
+                  </div>
+                  <!-- <mat-list-item class="dragIcon" *ngFor="let item of listItems;let i=index" draggable="true" (dragenter)="dragEnter(i,$event)" (dragstart)="dragStart(i,$event)"
+                        (dragend)="dragEnd(i,$event)">
+                        
+                      </mat-list-item> -->
+
+                  <div class="list-item">
+                    <mat-list-item>
+                      <div class="formfield">
+                        <mat-form-field (keyup.enter)="saveItem(list.newItem,list)" class="inputListItem">
+                          <input matInput #listItem [(ngModel)]="list.newItem" placeholder="Enter new item" autocomplete="off">
+                        </mat-form-field>
+                      </div>
+                    </mat-list-item>
+                  </div>
+                </ul>
+
+
+              </div>
+            </mat-list>
+          </ng-container>
+        </div>
+      </ng-template>
+    </mat-card-content>
+  </div>
+</ng-container>

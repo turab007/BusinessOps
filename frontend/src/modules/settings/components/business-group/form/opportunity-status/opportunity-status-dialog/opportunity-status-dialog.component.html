@@ -1,0 +1,40 @@
+<div>
+    <div class="mat-headline">{{pageTitle}}</div>
+    <hr />
+    <div>
+        <form [formGroup]="fg" novalidate (ngSubmit)="save(fg.value, fg.valid)">
+            <div layout="row">
+                <mat-form-field flex>
+                    <input matInput required type="text" formControlName="name" [placeholder]="componentLabels.name">
+                    <mat-error *ngIf="fg.controls.name.valid ||(fg.controls.name.pristine && !submitted)">
+                        <validation-error [control]="fg.controls.name" [error]="''" [label]="componentLabels.name">
+                        </validation-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div layout="row">
+                <mat-form-field flex>
+                    <textarea matInput formControlName="description" [placeholder]="componentLabels.description" rows="5"></textarea>
+                </mat-form-field>
+                <input required type="hidden" formControlName="business_group_id" [placeholder]="componentLabels.business_group_id">
+                <input required type="hidden" formControlName="type" [placeholder]="componentLabels.type">
+            </div>
+            <div layout="row">
+                <mat-form-field flex>
+                    <input matInput type="number" formControlName="weight" [placeholder]="componentLabels.weight">
+                </mat-form-field>
+            </div>
+
+            <div layout="row" style="margin:0 0px 10px 0">
+                <div flex="25">
+                    <mat-slide-toggle [checked]="fg.controls.status.value" formControlName="status">Active</mat-slide-toggle>
+                </div>
+
+            </div>
+            <div>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!fg.valid">Save</button>
+                <a mat-button class="tc-grey-600" (click)="dialogRef.close(false)">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

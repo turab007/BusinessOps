@@ -1,0 +1,73 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-spinner *ngIf="loading">
+
+  </mat-spinner>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="center center" class="linkdiv" *ngIf="!employee.gitlab_token">
+  GitLab account not Assosiated.
+  <!-- <div>
+    <md-icon class="git-icon" mdTooltip="Connect to GitLab" (click)="redirectGitLab()">
+      <img src="../../../../assets/icons/gitlab.svg" class="git-icon">
+    </md-icon>
+  </div> -->
+</div>
+
+
+<ng-template [ngIf]="showRepos && gitLabRepos">
+  <div fxLayout="row" fxLayoutAlign="start center" class="listHeading">
+    <span class="listTitle">
+      Repositories:
+    </span>
+  </div>
+  <mat-list>
+    <mat-list-item *ngFor="let repo of gitLabRepos" (click)="getRepoBranches(repo)" class="listItem">
+      {{repo.name}}
+    </mat-list-item>
+  </mat-list>
+</ng-template>
+
+<ng-template [ngIf]="showBranches">
+  <div fxLayout="row" fxLayoutAlign="start center" class="listHeading">
+    <mat-icon (click)="navigateToRepos()">
+      keyboard_arrow_left
+    </mat-icon>
+    <span class="listTitle">
+      Repository Branches:
+    </span>
+  </div>
+  <mat-list>
+    <mat-list-item *ngFor="let branch of gitlabBranches" (click)="getRepoCommits(branch)" class="listItem">
+      {{branch.name}}
+
+    </mat-list-item>
+  </mat-list>
+</ng-template>
+
+
+<ng-template [ngIf]="showCommits">
+  <div fxLayout="row" fxLayoutAlign="start center" class="listHeading">
+    <mat-icon (click)="navigateToBranches()">
+      keyboard_arrow_left
+    </mat-icon>
+    <span class="listTitle">
+      Commits:
+    </span>
+  </div>
+  <mat-list>
+    <mat-list-item *ngFor="let commit of commits" class="commits">
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="commitDiv">
+        <div>
+          <p>{{commit.title}}</p>
+          <p>{{commit.author_name}} committed {{commit.created_at | timeAgo}}</p>
+        </div>
+
+        <div>
+          <p>{{commit.short_id}}</p>
+        </div>
+      </div>
+
+    </mat-list-item>
+
+  </mat-list>
+</ng-template>

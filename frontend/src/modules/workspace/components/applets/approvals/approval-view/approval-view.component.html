@@ -1,0 +1,87 @@
+<div class="approval-view-wrapper">
+    <mat-card *ngIf="approval" id="main-card">
+      <!-- main description styles -->
+      <div class="approval-detail">
+          <div class="card-title">
+            <div class="card-title-view">
+              <div *ngIf="!editTitle" class="title-text">{{approval.name}}</div>
+              <button *ngIf="!editTitle" mat-icon-button class="edit-btn" matTooltip="edit" (click)="editApproval()">
+                <mat-icon>mode_edit</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="sub-details">
+              <div class="rightcontent">
+                <div class="approval-group">
+                  <div class="info-content" *ngIf=" approval.assign_to_workspace && approval.assign_to_workspace._id != approval.work_space._id  && approval.assign_to_workspace._id==ws._id">
+                    <strong>Assigned by</strong>
+                    <span>: {{approval.work_space.name}}</span>
+                  </div>
+  
+                  <div class="info-content" *ngIf="approval.assign_to_workspace && approval.work_space._id==ws._id">
+                    <strong> Assigned to </strong>
+                    <span>: {{approval.assign_to_workspace.name}}</span>
+                  </div>
+  
+                  <div class="info-content" *ngIf=" currentUser && approval.assign_to_user && currentUser._id!=approval.assign_to_user._id">
+                    <strong> Assigned to </strong>
+                    <span>: {{approval.assign_to_user.name}}</span>
+                  </div>
+  
+                  <div class="info-content" *ngIf=" currentUser && approval.assign_to_user && currentUser._id==approval.assign_to_user._id">
+                    <strong> Assigned by </strong>
+                    <span>: {{approval.created_by.name}}</span>
+                  </div>
+  
+                  <div class="info-content" *ngIf="approval.due_date">
+                    <strong> Due</strong>
+                    <span>: {{approval.due_date | date}} </span>
+                  </div>
+  
+                  <div class="info-content" *ngIf="!approval.due_date">
+                    <strong >Due </strong> 
+                    <span>: No date available</span>
+                  </div>
+  
+                  <div  class="info-content"[matTooltip]="approval.created_at | date:'medium' ">
+                    <strong> Assigned </strong>
+                    <span>: {{approval.createdAgo}}</span>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="approval-description">
+            <div class="desc-title"><span>Description:</span></div>
+            <div *ngIf="!editDesc && !approval.description" class="desc-text">Empty space is so boring... go on be descriptive...</div>
+            <div *ngIf="!editDesc &&  approval.description" class="desc-text" [innerHTML]="approval.description"></div>
+          </div>
+          <!-- task attachment section -->
+          <div class="approval-attachment">
+            <app-approval-view-attachments [approval]="approval"> </app-approval-view-attachments>
+          </div>
+
+            <!-- Top buttons -->
+            <div class="approval-buttons">
+              <div *ngIf="approval.status == 'Pending'" >
+                <button mat-raised-button color=primary  *ngIf="(approval.assign_to_workspace && approval.assign_to_workspace._id==ws._id) || (approval.assign_to_user && (approval.assign_to_user._id==currentUser._id))"
+                  matTooltip="approve request" (click)="updateStatus('Approved')"> Approval
+                </button>
+                <button mat-raised-button color=primary matTooltip="reject request" (click)="updateStatus('Rejected')">Disapproval</button>
+              </div>
+            </div>
+        </div>
+  
+        <!-- sidebar info  section-->
+        <aside class="sidebar-detail">
+          <!-- comments  section-->
+          <div class="approval-comments">
+            <app-approval-view-comments [approval]="approval" (refresh)="refreshContent($event)"></app-approval-view-comments>
+          </div>
+          <!-- activity section -->
+          <div class="approval-activity">
+            <app-approval-view-activity [approvalId]="approval._id" [ws]="ws"> </app-approval-view-activity>
+          </div>
+        </aside>
+    </mat-card>
+  </div>
+  

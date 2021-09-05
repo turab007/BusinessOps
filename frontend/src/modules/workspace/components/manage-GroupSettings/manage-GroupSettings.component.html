@@ -1,0 +1,26 @@
+<button mat-mini-fab color=primary class="fab-primary-btn" matTooltip="add user to workspace" matTooltipPosition="left" (click)="addUserToWs()"><mat-icon>add</mat-icon></button>
+<div class="group-settings">
+  <mat-card class="settings-card">
+      <div class="settings-list" *ngIf="ws">
+        <div class="settings-header">
+          <span> Member</span>
+          <span> Access</span>
+          <span> Actions</span>
+        </div>
+        <div class="setting-item" *ngFor="let userList of ws.user_role">
+          <div class="text-item">
+            <mat-icon>person</mat-icon>
+            <span>{{userList._id.fullname}}</span>
+          </div>
+          <div class="select-holder">
+            <mat-select placeholder="Select role" fxFlex="40" [(ngModel)]="userList.role" (change)="updateUserRole(userList._id,userList.role)">
+              <mat-option *ngFor="let roles of userRoles" [value]="roles._id">
+                {{ roles.name }}
+              </mat-option>
+            </mat-select>
+          </div>
+          <mat-icon class="closebtn" (click)="deleteUser(userList._id)">close</mat-icon>
+        </div>
+      </div>
+  </mat-card>
+</div>

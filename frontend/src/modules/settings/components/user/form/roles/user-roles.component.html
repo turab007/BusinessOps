@@ -1,0 +1,28 @@
+<label class="custom_label">Roles</label>
+<td-chips *ngIf="rolesNames" [items]="rolesNames" [(ngModel)]="userRolesNames" placeholder="Enter autocomplete strings" requireMatch
+            (add)="emitRole()" (remove)="emitRole()" [readOnly]="readOnly">
+        </td-chips>
+<!--<div layout="row">
+    <div flex="20">
+        <div style="padding-top:10px;">
+            <label>User Roles</label>
+        </div>
+    </div>
+    <div fxFlex>
+        <td-chips fxFlex *ngIf="rolesNames" [items]="rolesNames" [(ngModel)]="userRolesNames" placeholder="Enter autocomplete strings" requireMatch
+            (add)="emitRole()" (remove)="emitRole()" [readOnly]="readOnly">
+        </td-chips>
+    </div>
+
+</div>-->
+
+<!--<div layout="row" layout-margin>
+
+    <div fxFlex *ngIf="roles && roles.length">
+        <div fxFlex *ngFor="let role of roles">
+            <mat-checkbox (change)="emitRole(role._id)" [disabled]="disabled" [checked]="role.checked">
+                {{role.name}}
+            </mat-checkbox>
+        </div>
+    </div>
+</div>-->

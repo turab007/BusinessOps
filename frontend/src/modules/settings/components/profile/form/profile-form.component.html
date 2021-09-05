@@ -1,0 +1,61 @@
+<mat-card class="user-card">
+    <mat-card-header>
+        <mat-card-title>
+            {{pageTitle}}
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <div td-toolbar-content layout="row" layout-align="center center" flex>
+            <span flex></span>
+            <a *ngIf="pageAction == 'view' " matTooltip="Update" [routerLink]="['/settings/profile/update']" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+            </a>
+
+        </div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <form [formGroup]="profileForm" novalidate (ngSubmit)="save(profileForm.value, profileForm.valid)">
+        <mat-card-content>
+
+            <!-- We'll add our form controls here -->
+            <div layout="row" layout-margin>
+                <mat-form-field fxFlex>
+                    <input matInput type="text" formControlName="first_name" [placeholder]="componentLables['first_name']">
+                    <mat-error [hidden]="profileForm.controls.first_name.valid || (profileForm.controls.first_name.pristine && !submitted)">
+
+                        <validation-error [control]="profileForm.controls.first_name" [error]="''" [label]="componentLables['first_name']">
+
+                        </validation-error>
+                    </mat-error>
+                </mat-form-field>
+
+
+            </div>
+            <div layout="row" layout-margin>
+                <mat-form-field fxFlex>
+                    <input matInput type="text" formControlName="last_name" [placeholder]="componentLables['last_name']">
+
+                    <mat-error [hidden]="profileForm.controls.last_name.valid || (profileForm.controls.last_name.pristine && !submitted)">
+                        <validation-error [control]="profileForm.controls.last_name" [error]="''" [label]="componentLables['last_name']">
+
+                        </validation-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+        </mat-card-content>
+        <div>
+            <mat-card-actions>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!profileForm.valid">Update</button>
+        <div class="iconDiv"  >
+            <mat-icon class="git-icon" matTooltip="Connect to GitHub" (click)="redirectGitHub()">
+            <img src="../../../../../assets/icons/github.svg"class="git-icon" >
+            </mat-icon>
+
+            <mat-icon class="git-icon" matTooltip="Connect to GitLab" (click)="redirectGitLab()">
+            <img src="../../../../../assets/icons/gitlab.svg" class="git-icon">
+            </mat-icon>
+        </div>
+            </mat-card-actions>
+        </div>
+    </form>
+</mat-card>

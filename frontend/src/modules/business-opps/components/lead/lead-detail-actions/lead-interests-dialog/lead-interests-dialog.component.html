@@ -1,0 +1,42 @@
+<div>
+    <div class="mat-headline">{{pageTitle}}</div>
+    <hr />
+    <div>
+        <form [formGroup]="fg" novalidate (ngSubmit)="save(fg.value, fg.valid)">
+            <div layout="column">
+                <multi-selector [data]="interestedTechnologies" [msFormGroup]="fg" [preSelected]="" [label]="componentLabels.intersted_in"
+                    [controlName]="'intersted_in'" [control]="fg.controls.intersted_in" [required]="true">
+                </multi-selector>
+
+
+                <mat-error *ngIf="fg.controls.intersted_in.valid || (fg.controls.intersted_in.touched && !submitted)">
+                    <validation-error [control]="fg.controls.intersted_in" [error]="''" [label]="componentLabels.intersted_in">
+
+                    </validation-error>
+                </mat-error>
+            </div>
+            <!--<div layout="row" *ngIf="interestedTechnologies && filteredTechnologies">
+                <td-chips color="accent" [items]="filteredTechnologies" [(ngModel)]="objectsModel" 
+                    
+                    (add)="addTechnology()" (remove)="removeTechnology()"
+                     (inputChange)="filterTechnologyObjects($event)"
+                    placeholder="Enter autocomplete strings"
+                    requireMatch>
+                    <ng-template td-chip let-chip="chip">
+                         {{chip.name}}
+                    </ng-template>
+                    <ng-template td-autocomplete-option let-option="option">
+                        <div layout="row" layout-align="start center">
+                             {{option.name}}
+                        </div>
+                    </ng-template>
+                </td-chips>
+            </div>-->
+            <div>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!fg.valid">Save</button>
+                <a mat-button class="tc-grey-600" (click)="dialogRef.close(false)">Cancel</a>
+            </div>
+        </form>
+        
+    </div>
+</div>

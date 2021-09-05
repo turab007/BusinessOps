@@ -1,0 +1,32 @@
+<div layout="row" layout-padding>
+
+    <span flex></span>
+    <a matTooltip="Add New Stage" (click)="openDialog()" mat-list-item>
+        <mat-icon mat-list-avatar class="cirle-radius-simple">add</mat-icon>
+    </a>
+
+</div>
+
+<mat-nav-list dense *ngIf="leadStatuses">
+    <ng-template let-lead_status let-last="last" ngFor [ngForOf]="leadStatuses">
+        <mat-list-item>
+            <mat-icon mat-list-avatar>settings</mat-icon>
+            <h4 mat-line><span class="text-wrap">{{lead_status.name}}</span></h4>
+            <p mat-line><span [style.color]="(lead_status.status)?'green':'red'"> {{lead_status.statusDisplay}}</span> {{lead_status.description}}
+            </p>
+            <span flex></span>
+            <span class="mat-caption text-right">
+                <button mat-icon-button [mat-menu-trigger-for]="menu">
+                <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu x-position="before" #menu="matMenu">
+                    <a (click)="openDialog(lead_status._id)" mat-menu-item>Edit</a>
+                    <button (click)="deleteRecord(lead_status)" mat-menu-item>Delete</button>
+                </mat-menu>
+            </span>
+        </mat-list-item>
+        <mat-divider *ngIf="!last"></mat-divider>
+    </ng-template>
+
+
+</mat-nav-list>

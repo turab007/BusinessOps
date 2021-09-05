@@ -1,0 +1,366 @@
+// @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i);
+$mat-select-trigger-min-width: 112px !default;
+body {
+  margin: 0;
+  background: #f2f2f2 !important;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+h1,h2,h3,h4,h5,h6,p{font-family: 'Roboto', sans-serif; font-weight: 500;}
+
+
+/*
+.clear{
+    clear:both;
+}*/
+
+
+/**
+* Todo:high: take this to component level
+*/
+
+td-dynamic-forms td-dynamic-element {
+  max-width: 45%;
+  width: 45%;
+  display: inline-block;
+}
+
+
+/**
+* ToDo:Low Following css has copied from covelent quick start, 
+* It was scss file we need to convert into scss in future 
+*/
+
+
+/*// Custom style for loading elements without height*/
+
+.will-load {
+  min-height: 80px;
+}
+
+
+/*// Href line height wasn't right for md-icon-button*/
+
+a[md-icon-button] {
+  line-height: 36px;
+}
+
+
+/*// Capitalize*/
+
+.text-capital {
+  text-transform: capitalize;
+}
+
+
+/*// Lighter font weight in sub-toolbars*/
+
+td-layout-manage-list .mat-toolbar {
+  font-weight: 400;
+}
+
+
+/**
+* Buttons at right left bottom
+*/
+
+.add-button-position {
+  position: fixed !important;
+  right: 20px;
+  bottom: 20px;
+}
+
+/*overriding covelent data tables css*/
+
+table[td-data-table] .td-data-table-row {
+  border-bottom-color: #d4d4d4;
+}
+
+table[td-data-table] .td-data-table-column {
+  font-size: 12px;
+  color: rgba(0, 0, 0, .54);
+}
+
+
+/* TODO:low: following tow css classes should be in some proper css file */
+
+.mat-select-disabled .mat-select-value {
+  color: #5e5e5e !important;
+}
+
+.mat-input-element:disabled {
+  color: #5e5e5e !important;
+}
+
+.mat-list .mat-list-item .mat-list-item-content,
+.mat-nav-list .mat-list-item .mat-list-item-content {
+  font-size: 14px !important;
+}
+
+//TODO: following css should not be here.
+.mat-basic-chip {
+  display: inline-block;
+  cursor: default;
+  border-radius: 6px !important;
+  line-height: 29px !important;
+  margin: 4px 4px 0 0 !important;
+  padding: 0 10px !important;
+  box-sizing: border-box;
+  max-width: 100%;
+  position: relative;
+}
+
+
+/*** Form row margin***/
+
+.top-10-left-10 {
+  margin: 10px 0px 0px 10px;
+}
+
+
+/**
+* TODO:Low (For consistency of fonts against textfields)
+*/
+
+.mat-select-trigger {
+  font-size: 14px !important;
+  height: 22px !important;
+  margin: 1em 0;
+  padding-bottom: 6px;
+  width: auto !important;
+}
+
+span.mat-select-placeholder.mat-floating-placeholder,
+span.mat-select-placeholder {
+  width: auto !important;
+  top: -1.3em !important;
+}
+
+// TODO:low: following css should not be here.
+.td-loading-wrapper[_ngcontent-c18] {
+  position: absolute !important; // display: block;
+  left: 45%;
+}
+
+.mat-input-placeholder {
+  font-size: 14px !important;
+}
+
+// md-input-container{  width: 100%;  .mat-input-placeholder {
+//     color: #a8a8a8;
+//     // padding: 0 10px;
+//     font-size: 12px !important;
+//     &.md-float {
+//         &.md-focused,
+//         &:not(.md-empty) {
+//             transform: translateY(-100%) scale(0.3) !important;
+//             }
+//         }  
+//     }
+// }
+md-icon.cirle-radius {
+  border: 1px solid;
+  border-radius: 50%;
+  border-color: #bdbdbd;
+  background-color: #bdbdbd;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+md-icon.cirle-radius-simple {
+  border-radius: 50%;
+  width: 40px !important;
+  height: 40px !important;
+  cursor: pointer;
+}
+
+.td-expansion-panel.full {
+  div.td-expansion-label {
+    width: 100%;
+    span a md-icon {
+      font-size: 18px;
+    }
+  }
+  .mat-card {
+    box-shadow: none;
+  }
+  .mat-card-content {
+    padding-top: 0;
+  }
+}
+
+//CUSTOM STYLING
+.mat-button-toggle-label-content {
+  text-align: center;
+}
+
+md-list-item {
+  outline: 0;
+}
+
+textarea {
+  resize: none;
+}
+
+//TODO: FIND A BETTER PLACE FOR THE BELOW STYLE SELECTOR
+dashboard-page {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+//TODO: FIND A BETTER PLACE FOR THE BELOW STYLE SELECTOR
+app-home,
+app-task-view {
+  height: 100%;
+}
+
+//TODO: FIND A BETTER PLACE FOR THE BELOW STYLE SELECTOR
+.task-view-content .mat-tab-body.mat-tab-body-active {
+  // height: 100%;
+}
+
+// app-home,
+// applet-list-list,
+// app-task-view {
+//   display: flex;
+//   flex-direction: row;
+//   flex: 1 1 auto;
+//   justify-content: flex-start;
+//   align-items: stretch;
+// }
+
+.mat-tooltip {
+  font-size: 12px !important;
+}
+
+// .mat-dialog-container {
+//   max-width: none;
+//   width: 100vw;
+//   height: 100vh;
+// }
+
+
+
+
+
+/*GLOBALLY REQUIRED STYLES FOR LIST*/
+
+.mat-list .mat-list-item .mat-list-item-content,
+.mat-nav-list .mat-list-item .mat-list-item-content {
+  /*height: 64px;*/
+  height: initial !important;
+  padding: 12px 16px !important;
+}
+
+
+/*FOR DYNAMIC TAB BODY HEIGHT*/
+
+.mat-tab-body-wrapper {
+  flex: 1 1 auto;
+}
+
+
+/*FOR FLEXED TAB LABELS*/
+
+.mat-tab-label {
+  flex: 1 1 auto;
+}
+
+.mat-button-wrapper {
+  line-height: inherit;
+}
+
+// FOR ALLOWING DRAGGABLE IN SAFARI
+[draggable=true] {
+  -khtml-user-drag: element;
+}
+
+#side-details .mat-list-item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+
+/*
+* Comments section
+*/
+
+.comment-menu>.mat-menu-content, .task-menu>.mat-menu-content {
+  padding: 0;
+}
+
+md-list-item.dragIcon div.mat-list-item-content {
+  cursor: url(/assets/icons/rsz_cursor-move-512.png), auto;
+}
+
+// Ckeditor
+.cke_contents {
+  height: 135px !important;
+}
+
+
+
+/*--dev styles--*/
+.task-card .card-wrapper{min-height: 155px;}
+.task-card .card-content .card-desc{min-height: 20px;}
+.dialog-wrapper .editor-wrapper .cke{width: 100% !important;}
+.approval-buttons button .mat-button-wrapper{color: #fff !important;}
+
+.group-settings .select-holder .mat-select{max-width: 200px !important;}
+.group-settings .select-holder .mat-select .mat-select-trigger{margin: 0; padding-bottom: 0;}
+
+/*--Dashboard styles--*/
+.page-wrapper .fab-primary-btn{height: 55px; width:55px; line-height:1;color: #fff; background-color: #f06313 !important;  position: fixed;right: 20px; bottom: 20px; z-index: 999;}  
+.page-wrapper .fab-primary-btn .mat-icon{color: #fff;}
+#main-container{height: 100%;}
+dashboard-page{height: 100%;}
+.modal-close-btn .mat-icon:hover,.modal-close-btn .mat-icon:focus{color: #00bff3 !important; cursor:pointer; transition: all 0.5s ease;}
+.comment-field .input-wrapper .mat-form-field-underline{background-color: #e0e0e0 !important;}
+.search-eod-form .form-content .mat-form-field-underline{background-color: #e0e0e0 !important;}
+
+/*--Form styles--*/
+.form-control{height: auto; box-shadow: none; border-radius: 0;}
+.form-control:focus{box-shadow: none;}
+.td-menu-content{ max-height: 270px !important;}
+.td-menu-content .mat-list-item{height: auto !important;}
+.mat-nav-list .mat-list-item .mat-list-item-content{display: flex; align-items: center;}
+.mat-nav-list .mat-list-item .mat-list-item-content .mat-icon{height: auto !important; width: auto !important;}
+.user-menu .mat-icon-button{background-color: #fff !important; color: #000 !important;}
+
+/*--Dailog styles--*/
+.mat-dialog-container{background: rgba(255,255,255, 0.15) !important;}
+.full-width-dialog {max-width: 100vw !important; width: 100vw; height: 100vh;  background: rgba(255,255,255, 0.95) !important;}
+
+.dialog-wrapper .mat-select-trigger{margin: 0; height: auto !important;}
+
+/*--Left Menu styles--*/
+.left-menu .mat-list-item{height: auto !important;}
+.left-menu .mat-list-item.active{color: #00bff3 !important;}
+.left-menu .mat-list-item.active .mat-icon{color: #00bff3 !important}
+.left-menu .mat-list-item .mat-list-item-content .mat-list-icon{height: auto !important; width: 25px !important;}
+
+/*--App styles--*/
+.mat-list .mat-list-item{height: auto !important;}
+.assignTaskSection .mat-list{width:100%; padding-top:0;}
+.assignTaskSection .mat-list-item  .mat-list-item-content{padding: 0 !important;}
+
+.listSection .list-item .formfield  .mat-form-field-underline,
+.cardSection .card-item .formfield  .mat-form-field-underline{background-color:#e0e0e0;}
+.card-wrapper .card-content .mat-card{border-radius: 0; box-shadow: none; margin: 0;}
+
+.list-wrapper.mat-list .mat-list-item .mat-list-item-content{padding: 0 !important;}
+.list-primary-btn.mat-mini-fab .mat-button-wrapper{display: flex; align-items: center; justify-content: center; padding: 0;}
+.header-toolbar-wrapper .mat-toolbar.mat-primary{background-color: #00bff3 !important;}
+
+.page-layout mat-sidenav-container.td-layout-manage-list > mat-sidenav{box-shadow: none !important;}
+.page-layout .mat-drawer{background-color: #f2f2f2 !important;}
+.page-layout .mat-sidenav-container{background-color: #f2f2f2 !important;}
+.page-layout .mat-toolbar{box-shadow: none; background-color: #f2f2f2 !important;}
+.page-wrapper{height: 100%;}
+
+.noneListItem{background-color: #fff; list-style-type: none;padding-left: 10px;}
+
+

@@ -1,0 +1,45 @@
+<div *ngIf="approvals" class="approval-card">
+    <mat-card *ngFor="let approval of approvals">
+      <div *ngIf="status==approval.status && ((approval.assign_to_workspace ) || (approval.assign_to_user))" [routerLink]="['/workspace/',ws,'approvals',approval.id]" class="card-inner-wrapper">
+        <div class="card-header">
+          <div class="card-label">{{approval.name}}</div>
+        </div>
+        <div class="card-content">
+          <div *ngIf="approval.assign_to_workspace && approval.assign_to_workspace._id != approval.work_space._id  && approval.assign_to_workspace._id==ws" class="card-item">
+            <strong>Assigned by: </strong>
+            <span>{{approval.work_space.name}} </span>
+          </div>
+  
+          <div *ngIf="  approval.assign_to_workspace && approval.work_space._id==ws" class="card-item">
+              <strong> Assigned to: </strong>
+              <span>{{approval.assign_to_workspace.name}} </span>
+          </div>
+  
+          <div *ngIf=" currentUser && approval.assign_to_user && currentUser._id!=approval.assign_to_user._id" class="card-item">
+            <strong>Assigned to:</strong>
+            <span>{{approval.assign_to_user.name}} </span>
+          </div>
+  
+          <div *ngIf=" currentUser && approval.assign_to_user && currentUser._id==approval.assign_to_user._id" class="card-item">
+            <strong>Assigned by:</strong>
+            <span>{{approval.created_by.name}} </span>
+          </div>
+  
+          <div class="card-item">
+            <strong> Assigned on: </strong>
+            <span>{{approval.createdDate}}</span>
+          </div>
+  
+          <div class="card-item"> 
+            <strong>Due Date:</strong>
+            <span *ngIf='approval.due_date'>{{approval.due_date | date}}</span>
+            <span *ngIf='!approval.due_date'>Due date not selected</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="info-time">1 day ago</div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  

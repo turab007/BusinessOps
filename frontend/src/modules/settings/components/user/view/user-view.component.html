@@ -1,0 +1,44 @@
+<mat-card class="user-card">
+    <mat-card-header>
+        <mat-card-title><a [routerLink]="['/settings/users/']"><mat-icon>toc</mat-icon></a>User</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+       
+        <table td-data-table #dataTable *ngIf="user">
+            <tr td-data-table-row>
+                <th td-data-table-column>
+                    Email
+                </th>
+                <td td-data-table-cell >
+                     {{user.user_id}}
+                </td>
+            </tr>
+            <tr td-data-table-row>
+                <th td-data-table-column>
+                    First Name
+                </th>
+                <td td-data-table-cell >
+                     {{user.first_name}}
+                </td>
+            </tr>
+            <tr td-data-table-row>
+                <th td-data-table-column>
+                    Last Name
+                </th>
+                <td td-data-table-cell >
+                     {{user.last_name}}
+                </td>
+            </tr>
+        </table>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <!--TODO : proper css managment -->
+        <a [routerLink]="['/settings/users/create']">
+            <button mat-mini-fab color="accent" class="add-button-position mat-warn">
+                <mat-icon>add</mat-icon>
+        </button>
+        </a>
+    </mat-card-actions>
+</mat-card>

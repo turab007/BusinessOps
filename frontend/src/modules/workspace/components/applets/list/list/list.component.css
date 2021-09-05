@@ -1,0 +1,40 @@
+
+div.listName {
+  background: #F3F3F3;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 10px 15px;
+  font-size: 14px;
+}
+.list-primary-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.noneList
+{
+  list-style-type: none;
+  padding-left: 0;
+}
+.numberList
+{
+  list-style-type:decimal;
+  padding-left: 30px !important;
+}
+.romanList
+{
+  list-style-type: upper-roman;
+  padding-left: 30px !important;
+}
+.lower-aplha-list
+{
+  list-style-type: lower-alpha;
+  padding-left: 30px !important;
+}
+.bulletList
+{
+  list-style-type:initial;
+  padding-left: 30px !important;
+}
+

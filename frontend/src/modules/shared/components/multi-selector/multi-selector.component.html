@@ -1,0 +1,9 @@
+<div [formGroup]="msFormGroup">
+    <mat-form-field>
+        <mat-select multiple="true" [formControlName]="controlName" [required]="required" [placeholder]="label" fxFlex>
+            <mat-option *ngFor="let record of data" value="{{record._id}}">
+                {{record.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

@@ -1,0 +1,39 @@
+<mat-card class="user-card">
+
+    <mat-card-header>
+        <mat-card-title>List</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      
+        <div td-toolbar-content layout="row" layout-align="center center" flex>
+            <span flex></span>
+            <button mat-icon-button  [routerLink]="['/business-opps/leads/kanban']" mat-tooltip="KanBan"><mat-icon class="mat-24">apps</mat-icon></button>
+            <mat-list-item>
+                <span>
+                    <button mat-icon-button [mat-menu-trigger-for]="menu" style="margin-top:3px;">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu x-position="before" #menu="matMenu">
+                        <a  [routerLink]="['/business-opps/leads/create']" mat-menu-item>
+                            <mat-icon>create</mat-icon>Create
+                        </a>
+                    </mat-menu>
+                </span>
+            </mat-list-item>
+        </div>
+    </mat-card-header>
+    <mat-card-content>
+        <datatable *ngIf="leads" [dataList]="leads" [columns]="dtColumns" 
+            [actionButtons]="actionButtons"
+            [totalRecords]="totalRecords" 
+            [sortBy]="'name'"
+            (deleteRecord)="deleteRecord($event)"
+            (nextPage)="nextPage($event)"
+            (filterRecords)="filterRecords($event)"
+            ></datatable>
+    </mat-card-content>
+
+</mat-card>
+
+<a mat-fab color="accent" class="mat-fab-bottom-right fixed" [routerLink]="['//business-opps/leads/create']">
+    <mat-icon>add</mat-icon>
+</a>

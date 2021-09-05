@@ -1,0 +1,16 @@
+<div [formGroup]="myForm" flex>
+
+    <mat-form-field fxFlex>
+        <input matInput formControlName="value" placeholder="Contact" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select formControlName="name" placeholder="Value" fxFlex placeholder="Mode">
+            <mat-option value="1">
+                Email
+            </mat-option>
+            <mat-option value="2">
+                Phone
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

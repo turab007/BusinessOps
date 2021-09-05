@@ -1,0 +1,84 @@
+.emptybox{display: flex; text-align:center; height: 100%; align-items: center; max-width: 600px; margin: 0 auto; }
+.emptybox span{flex-grow: 1;padding: 15px; display: block; font-size:24px; font-weight: 300;border:2px dashed #e1e1e1;}
+
+.cardSection{display: flex;flex-wrap: wrap;padding:15px 0; width: 100%;}
+.card-wrapper {width: 25%;border: 0; padding: 0 10px; margin-bottom: 20px;cursor:pointer;}
+.card-wrapper .card-header .card-title{background-color: #fff; border-bottom: 5px solid #00bff3;padding:10px 15px;}
+.card-wrapper .formfield .mat-list-item-content{ width: 100%; flex-grow:1;}
+
+.card-item {background-color: #fff; padding: 10px 0;}
+.card-item .formfield{width:100%;}
+.card-item .formfield .mat-form-field{width:100%;}
+.card-primary-btn{height: 55px; width:55px; line-height:1;color: #fff; background-color: #f06313 !important;}
+
+.card-header{position: relative; margin-bottom: 10px;}
+.card-header .actionbtns{position: absolute; top:0; width: 100%;}
+.card-header .actionbtns .iconDiv{display: none; justify-content: center; align-items: center; background-color: rgba(255,255,255,0.8); padding: 10px 15px;}
+.card-header:hover .actionbtns .iconDiv{display: flex;}
+.card-header .actionbtns .iconDiv .settings{cursor: pointer; font-size: 18px; color: #666; margin: 0 5px; display: block;}
+.card-header .actionbtns .iconDiv a{cursor: pointer; color: #666; margin: 0 5px; display: block;line-height: 1;}
+
+.card-header .actionbtns .iconDiv a .mat-icon{font-size: 18px;}
+.card-header .actionbtns .iconDiv a:hover .mat-icon{color: #00bff3; transition: all 0.5s ease;}
+.card-wrapper .card-content .mat-card{border-radius: 0; box-shadow: none;}
+
+.task-container .card-header .actionbtns .iconDiv{justify-content: flex-end;padding: 15px;}
+.task-container .card-header .card-title{padding: 15px;}
+
+/*--task card--*/
+.task-card .card-wrapper{padding: 0;width: 100%;  margin-bottom: 10px; -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1); -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1); box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1); }
+.task-card .card-wrapper .card-title{display: flex; align-items: center;padding:0;border: none;}
+.task-card .card-wrapper .intials{background: #c2c2c2;margin-right: 10px; width:40px; height: 40px;}
+.task-card .card-wrapper .intials span{display: block; font-size: 16px; font-weight: 600; color:#fff; padding: 10px;}
+.task-card .card-header .actionbtns .iconDiv{justify-content: flex-end;padding: 15px;}
+
+.task-card .card-content{padding:0 15px;}
+.task-card .card-content .card-label{font-weight: 600; font-size: 14px; color: #363636; text-transform: capitalize; margin-bottom: 8px;}
+.task-card .card-content .card-desc{font-weight: 300; font-size: 14px; color: #7d7d7d; margin-bottom: 5px;}
+.task-card .card-footer{padding:15px;position: relative;}
+.task-card .card-footer .actionbtns{display: flex; align-items: center;position: relative;}
+.task-card .card-footer .actionbtns .icon-list{display: flex; align-items: center; position: absolute; top:2px; left:25px; transition: all 0.5s ease;}
+.task-card .card-footer .actionbtns .info-icon{display: flex; align-items: center; margin-right: 5px;}
+.task-card .card-footer .actionbtns:hover .icon-list{transition: all 0.5s ease;}
+.task-card .card-footer .actionbtns .icon-list .mat-icon,
+.task-card .card-footer .actionbtns .info-subject{color: #7d7d7d;font-size: 22px; cursor: pointer;}
+.task-card .card-footer .actionbtns .info-subject:hover,
+.task-card .card-footer .actionbtns .icon-list .mat-icon:hover{color: #00bff3;transition: all 0.5s ease;}
+/*--assign task styles--*/
+.assignTaskSection{width:100%;}
+.assignTaskSection .assignTaskContent{display: flex; flex-grow:1; align-items: center;border-bottom: 1px solid #e4e3e3; padding: 5px 0; cursor: pointer;}
+.assignTaskContent .intials{background: #c2c2c2;margin-right: 10px; width:40px; height: 40px;}
+.assignTaskContent .intials span{display: block; font-size: 16px; font-weight: 600; color:#fff; padding: 10px;}
+.assignTaskContent .labelTitle{font-size: 18px; font-weight: 300;}
+.assignTaskContent:hover{background-color: rgba(216,248,121,.3); cursor: pointer;}
+
+/*--modal styles--*/
+.modal-close-btn .mat-icon{position: absolute; top:50px; right: 50px; color:#959595; font-size: 50px; cursor: pointer;}
+.dialog-wrapper{display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%; height: 100%; max-width: 600px; margin: 0 auto; text-align: center; position: relative;}
+.dialog-wrapper form{width:100%;}
+.dialog-wrapper .dialog-title{text-align: center;}
+.dialog-wrapper .dialog-title h4{margin: 0 0 30px;display: block; color: #363636; font-size: 24px; font-weight: 400;}
+.dialog-wrapper .form-content{display: flex; flex-direction: column; justify-content: center;}
+.dialog-wrapper .form-content .input-wrapper{margin-bottom:0px; display: block;}
+.dialog-wrapper .mat-form-field .input-wrapper{display: block !important;}
+
+.modal-btns{margin-top: 30px;}
+.modal-btns .default-btn{background-color:#959595; color: #fff;}
+.modal-btns .mat-primary{background-color:#00bff3; color: #fff;}
+.modal-btns button{min-width: 180px; text-transform: uppercase; -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1); -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1); box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1); }
+
+
+/*--task comment styles--*/
+.sidebar-heading{color: #00bff3;font-weight: 400; margin-bottom: 15px;}
+
+@media(min-width: 1200px){
+    .cardSection{width: calc(100% - 85px);}
+}
+
+@media(max-width: 991px){
+    .card-wrapper {width:50%;}
+}
+@media(max-width: 480px){
+    .card-wrapper {width:100%;}
+    .modal-btns button{min-width:100px;}
+}

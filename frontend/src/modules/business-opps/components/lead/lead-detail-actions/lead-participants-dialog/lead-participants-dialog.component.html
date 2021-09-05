@@ -1,0 +1,25 @@
+<div>
+    <div class="mat-headline">{{pageTitle}}</div>
+    <hr />
+    <div>
+        <form [formGroup]="fg" novalidate (ngSubmit)="save(fg.value, fg.valid)">
+            <div layout="column">
+                 <multi-auto-complete *ngIf="lead"
+                                [msFormGroup]="fg" 
+                                [model] = "lead"
+                                [label]="componentLabels.participants"
+                                [service] = '_userService'
+                                [readonly] = "false"
+                                [controlName]="'participants'" [control]="fg.controls.participants" 
+                                [required]="true" >
+                            </multi-auto-complete>
+            </div>
+
+            <div>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!fg.valid">Save</button>
+                <a mat-button class="tc-grey-600" (click)="dialogRef.close(false)">Cancel</a>
+            </div>
+        </form>
+        
+    </div>
+</div>

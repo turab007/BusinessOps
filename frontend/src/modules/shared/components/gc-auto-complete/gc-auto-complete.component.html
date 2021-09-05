@@ -1,0 +1,17 @@
+<div [formGroup]="gcFormGroup">
+    <div layout="row">
+         <mat-radio-button [value]="checkBoxValue" *ngIf="checkBox" [checked]="isChecked"></mat-radio-button>
+        <mat-form-field fxFlex>
+            <input matInput [formControlName]="titleControlName" type="text" 
+                [required]="required" [placeholder]="label" [matAutocomplete]="auto">
+            <input [formControlName]="keyControlName" type="hidden" />
+
+        </mat-form-field>
+    </div>
+
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of options " [value]="option[nameKey]"  (onSelectionChange)='onSelect($event,option)' >
+            {{ option[nameKey] }}
+        </mat-option>
+    </mat-autocomplete>
+</div>

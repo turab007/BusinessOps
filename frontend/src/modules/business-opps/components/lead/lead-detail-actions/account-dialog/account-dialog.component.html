@@ -1,0 +1,59 @@
+<div>
+    <div class="mat-headline">{{pageTitle}}</div>
+    <hr />
+    <div>
+        <form [formGroup]="fg" novalidate (ngSubmit)="save(fg.value, fg.valid)">
+            <div layout="row">
+                <mat-form-field fxFlex>
+                    <input matInput formControlName="name" required type="text" [placeholder]="componentLabels.name">
+                    <mat-error *ngIf="fg.controls.name.valid || (fg.controls.name.pristine && !submitted)">
+                        <validation-error [control]="fg.controls.name" [error]="''" [label]="componentLabels.name">
+
+                        </validation-error>
+
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div layout="row">
+                <mat-form-field fxFlex>
+                    <input matInput formControlName="contact_name"  type="text" [placeholder]="componentLabels.contact_name">
+                    <mat-error *ngIf="fg.controls.contact_name.valid || (fg.controls.contact_name.pristine && !submitted)">
+                        <validation-error [control]="fg.controls.contact_name" [error]="''" [label]="componentLabels.contact_name">
+
+                        </validation-error>
+
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div layout="row">
+                <mat-form-field fxFlex>
+                    <input matInput formControlName="company_name"  type="text" [placeholder]="componentLabels.company_name">
+                    <mat-error *ngIf="fg.controls.company_name.valid || (fg.controls.company_name.pristine && !submitted)">
+                        <validation-error [control]="fg.controls.company_name" [error]="''" [label]="componentLabels.company_name">
+
+                        </validation-error>
+
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div layout="row">
+                <mat-form-field fxFlex>
+                    <input matInput formControlName="owner"  type="text" [placeholder]="componentLabels.owner">
+                    <mat-error *ngIf="fg.controls.owner.valid || (fg.controls.owner.pristine && !submitted)">
+                        <validation-error [control]="fg.controls.owner" [error]="''" [label]="componentLabels.owner">
+
+                        </validation-error>
+
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!fg.valid">Save</button>
+                <a mat-button class="tc-grey-600" (click)="dialogRef.close(false)">Cancel</a>
+            </div>
+        </form>
+
+    </div>
+</div>

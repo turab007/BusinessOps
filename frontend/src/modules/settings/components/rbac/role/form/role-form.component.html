@@ -1,0 +1,144 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            {{pageTitle}}
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <div td-toolbar-content layout="row" layout-align="center center" flex>
+            <span flex></span>
+            <detail-page-nav [page]="pageAction" [model]="_roleModel" [url]="'/settings/roles/'" (deleteRecord)="deleteRecord($event)"></detail-page-nav>
+        </div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+
+        <!--<mat-nav-list>
+            <mat-list>
+                <mat-list-item *ngFor="let hero of heroes" (click)="toggleState(hero)" [@heroState]="hero.state">
+                    {{hero.name}}
+                </mat-list-item>
+            </mat-list>
+        </mat-nav-list>-->
+
+        <!--<ul>
+            <li *ngFor="let hero of heroes" [@heroState]="hero.state" (click)="hero.toggleState()">
+                {{hero.name}}
+            </li>
+        </ul>-->
+
+        <form [formGroup]="roleForm" novalidate (ngSubmit)="save(roleForm.value, roleForm.valid)">
+
+            <div class="form-group">
+
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+                        <input required matInput type="text" class="form-control" formControlName="name" placeholder="{{componentLabels.name}}">
+
+                        <mat-error *ngIf="roleForm.controls.name.valid || (roleForm.controls.name.pristine && !submitted)">
+                            <validation-error [control]="roleForm.controls.name" [error]="''" [label]="componentLabels.name">
+
+                            </validation-error>
+
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+                        <textarea matInput class="form-control" formControlName="description" placeholder="{{componentLabels.description}}"></textarea>
+                        <mat-error *ngIf="roleForm.controls.description.valid || (roleForm.controls.description.pristine && !submitted)">
+                            <validation-error [control]="roleForm.controls.description" [error]="''" [label]="componentLabels.description">
+
+                            </validation-error>
+
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <!--<div>
+                    <permissions-form *ngIf="selectedModule" 
+                        [selectedModule]="selectedModule" 
+                        [rolePermissionsAry]="rolePermissionsAry" 
+                        [pageAction]="pageAction"
+                        (pushPermission)="pushPermission($event)"></permissions-form>
+                </div>-->
+
+            </div>
+
+            <!--TODO:high: move it to a separate component (permissions)-->
+            <mat-tab-group>
+                <mat-tab label="Access Rights">
+                    <div>
+
+                        <div fxLayout="column">
+                            <div style="margin:0px;">
+
+                            </div>
+                            <div>
+                                <div fxLayout="row" fxFlex="100" *ngIf="moduleAps && moduleAps.length">
+                                    <div class="blocks" fxFlex="15" style="margin:20px 20px 0px 0px">
+                                        <mat-nav-list>
+                                            <mat-list>
+                                                <!--[class.active]="module.module_id==selectedModule"-->
+                                                <mat-list-item *ngFor="let module of moduleAps" (click)="loadFeatures(module.module_id)" [@activeState]="module.activeState">
+                                                    {{module.name}}
+                                                </mat-list-item>
+                                            </mat-list>
+                                        </mat-nav-list>
+                                    </div>
+
+                                    <div class="blocks" fxFlex style="border-left:1px solid lightgray; padding-left:20px;">
+                                        <table td-data-table *ngIf="features">
+                                            <th td-data-table-column></th>
+                                            <th td-data-table-column>View</th>
+                                            <th td-data-table-column>Write</th>
+                                            <th td-data-table-column>Create</th>
+                                            <th td-data-table-column>Delete</th>
+                                            <tbody>
+                                                <tr td-data-table-row *ngFor="let column of features">
+                                                    <td td-data-table-cell>
+                                                        {{column.title}}
+                                                    </td>
+                                                    <td td-data-table-cell>
+                                                        <mat-checkbox *ngIf="column.index_id" (change)="pushPermission(column.index_id)" [checked]="column.index_checked" [disabled]="checkbox_disabled"></mat-checkbox>
+                                                    </td>
+                                                    <td td-data-table-cell>
+                                                        <mat-checkbox *ngIf="column.update_id" (change)="pushPermission(column.update_id)" [checked]="column.update_checked" [disabled]="checkbox_disabled"></mat-checkbox>
+                                                    </td>
+                                                    <td td-data-table-cell>
+                                                        <mat-checkbox *ngIf="column.create_id" (change)="pushPermission(column.create_id)" [checked]="column.create_checked" [disabled]="checkbox_disabled"></mat-checkbox>
+                                                    </td>
+                                                    <td td-data-table-cell>
+                                                        <mat-checkbox *ngIf="column.delete_id" (change)="pushPermission(column.delete_id)" [checked]="column.delete_checked" [disabled]="checkbox_disabled"></mat-checkbox>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </mat-tab>
+                <mat-tab label="Inherited Roles">
+                    <div style="margin:50px; text-align:center">Pending</div>
+                </mat-tab>
+                <mat-tab label="Users">
+                    <div style="margin:50px; text-align:center">Pending</div>
+                </mat-tab>
+            </mat-tab-group>
+
+            <div style="margin-top:30px;" *ngIf="pageAction && pageAction.toString() != 'view'">
+                <mat-card-actions>
+                    <button type="submit" mat-raised-button color="primary" [disabled]="!roleForm.valid">Save</button>
+
+                    <a mat-button class="tc-grey-600" [routerLink]="['/settings/roles/']">Cancel</a>
+                </mat-card-actions>
+            </div>
+
+        </form>
+    </mat-card-content>
+
+</mat-card>

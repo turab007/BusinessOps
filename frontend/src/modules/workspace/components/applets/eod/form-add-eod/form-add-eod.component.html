@@ -1,0 +1,25 @@
+<div class="modal-close-btn"><mat-icon (click)="dialogRef.close()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>{{formHeading}}</h4></div>
+
+  <form [formGroup]="eodForm" (ngSubmit)="save(eodForm.value, eodForm.valid)" class="form-content">
+    <!-- <mat-form-field></mat-form-field> -->
+    <mat-form-field class="input-wrapper">
+      <input matInput *ngIf="!editEod" [matDatepicker]="reportDate" [placeholder]="componentLabels.date" formControlName="date"  (click)="reportDate.open()" >
+      <input matInput *ngIf="editEod" [matDatepicker]="reportDate" [placeholder]="componentLabels.date" formControlName="date" [(ngModel)]="editEod.date" (click)="reportDate.open()" > 
+      <mat-datepicker-toggle matSuffix [for]="reportDate"></mat-datepicker-toggle>
+    </mat-form-field>
+    <mat-datepicker #reportDate></mat-datepicker>
+
+    <div class="editor-wrapper">
+      <ckeditor *ngIf="!editEod" formControlName="report" [config]="ckEditorConfig" [readonly]="false"></ckeditor>
+      <ckeditor *ngIf="editEod" formControlName="report" [config]="ckEditorConfig" [(ngModel)]="editEod.report" [readonly]="false"></ckeditor> 
+    </div>
+        
+    <div class="modal-btns">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!eodForm.valid && !editState">Save</button>
+      <button mat-raised-button class="default-btn" type="button" (click)="dialogRef.close()">close</button>
+    </div>
+  </form>
+
+</div>

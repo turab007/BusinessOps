@@ -1,0 +1,28 @@
+<div class="modal-close-btn"><mat-icon (click)="closeDialogue()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>Applets</h4></div>
+  <div class="applet-dialog">
+    <ng-container *ngFor="let applet of applets; let i = index">
+        <div class="card-wrapper">
+          <div class="cardBox">
+            <div class="tag_added" matTooltip="Already added" *ngIf="applet.personal">
+              <span>active</span>
+            </div>
+
+            <div class="card-title">
+              <span>{{applet.name}}</span>
+              <div class="btn-section" id="ws-actions">
+                <button mat-icon-button class="ws-action-btn" (click)="removeAppletFromWorkSpace(applet)" *ngIf="applet.personal">
+                  <mat-icon class="ws-action-icn" matTooltip="Remove">clear</mat-icon>
+                </button>
+                <button mat-icon-button class="ws-action-btn" (click)="addAppletToWorkSpace(applet)" *ngIf="!applet.personal">
+                  <mat-icon class="ws-action-icn" matTooltip="Add">add</mat-icon>
+                </button>
+              </div>
+            </div>           
+
+          </div>
+        </div>
+      </ng-container>
+  </div>
+</div>

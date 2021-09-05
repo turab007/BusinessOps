@@ -1,0 +1,41 @@
+<ng-template tdLoading="overlayStarSyntax">
+    <mat-card class="mailServer-card">
+        <mat-card-header>
+            <mat-card-title>
+                {{pageTitle}}
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+
+            <div td-toolbar-content layout="row" layout-align="center center" flex>
+                <span flex></span>
+                <detail-page-nav [page]="pageAction" [model]="mailServer" [url]="'/settings/mail-servers/'" (deleteRecord)="deleteRecord($event)"></detail-page-nav>
+            </div>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <form [formGroup]="mailServerForm" novalidate (ngSubmit)="send(mailServerForm.value, mailServerForm.valid)">
+            <mat-card-content>
+
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+
+                        <input matInput required type="text" formControlName="email" [placeholder]="componentLabels.email" validate-onblur>
+                        <mat-error *ngIf="mailServerForm.controls.email.valid || (mailServerForm.controls.email.pristine && !submitted)">
+                            <validation-error [control]="mailServerForm.controls.email" [error]="''" [label]="componentLabels.email">
+
+                            </validation-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+
+            </mat-card-content>
+            <mat-card-actions>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!mailServerForm.valid">Send</button>
+                <a mat-button class="tc-grey-600" [routerLink]="['/settings/mail-servers/']">Cancel</a>
+            </mat-card-actions>
+
+        </form>
+    </mat-card>
+
+
+</ng-template>

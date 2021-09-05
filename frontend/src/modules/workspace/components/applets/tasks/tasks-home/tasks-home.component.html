@@ -1,0 +1,47 @@
+<button mat-mini-fab color=primary class="fab-primary-btn" (click)="addTaskGroup()" matTooltip="add group" matTooltipPosition="left"><mat-icon>add</mat-icon></button>
+<div *ngIf="taskGroups && taskGroups.length == 0 && ws.space_type != 'Personal'" class="emptybox">
+  <span>No task groups added yet</span>
+</div>
+<div id="task-grp-container" class="task-container">
+  <ng-container *ngIf="taskGroups && ws">
+    <div class="cardSection">
+      <!-- Assigned tasks -->
+      <mat-list class="card-wrapper" *ngIf="ws.space_type == 'Personal'">
+        <div class="card-header">
+            <div class="card-title">
+              <span> Assigned Tasks </span>
+            </div>
+        </div>
+        <div class="card-content">
+          <app-task-group-task *ngFor="let t of assignedTasks" [taskGroup]="t.task_group_id" [task]="t" [routerLink]="['/workspace/',ws._id,'tasks',t.task_group_id._id,t._id]"></app-task-group-task>
+        </div>
+      </mat-list>
+      <!-- task groups -->
+      <mat-list class="card-wrapper" *ngFor="let taskGroup of taskGroups; let i = index" draggable="true" (dragenter)="dragEnter(i,$event)"
+        (dragstart)="dragStart(i,$event)" (dragend)="dragEnd(i,$event)">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="title">{{taskGroup.name}}</div>
+          </div>
+          <div class="actionbtns">
+            <div class="iconDiv">
+              <a (click)="editTaskGroupName(taskGroup,i)" matTooltip="Edit">
+                <mat-icon>mode_edit</mat-icon>
+              </a>
+              <a (click)="deleteTaskGroup(taskGroup,i)"  matTooltip="Delete">
+                <mat-icon>delete</mat-icon>
+              </a>
+              <a (click)="addTask(taskGroup)"  matTooltip="Add Task">
+                  <mat-icon>add</mat-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+        <mat-card-content [dragula]='"bag-one"' [attr.data-id]="taskGroup._id" class="group_{{taskGroup._id}}  card-content">
+          <app-task-group-task *ngFor="let task of taskGroup.tasks; let i = index"  [attr.data-id]="task._id" [attr.data-index]="index"
+            [taskGroup]="taskGroup" [task]="task" (onRemoveTask)="removeTask($event)" [routerLink]="['/workspace/',taskGroup.work_space,'tasks',taskGroup._id,task._id]"></app-task-group-task>
+        </mat-card-content>
+      </mat-list>
+    </div>
+  </ng-container>
+</div>

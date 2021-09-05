@@ -1,0 +1,22 @@
+<div class="modal-close-btn"><mat-icon (click)="close()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>New Group Space</h4></div>
+  <form [formGroup]="workspaceForm" (ngSubmit)="save(workspaceForm.value, workspaceForm.valid)" id="add-ws-form" class="add-form form-content">
+    <mat-form-field class="input-wrapper">
+      <input matInput type="text" formControlName="name" placeholder="Title" required="true" maxlength="100" />
+      <mat-error *ngIf="workspaceForm.controls.name.valid || (workspaceForm.controls.name.pristine && !submitted)">
+        <validation-error [control]="workspaceForm.controls.name" [error]="''" [label]="componentLabels.name"></validation-error>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-wrapper">
+      <textarea matInput formControlName="description" placeholder="Description" wrap="hard"></textarea>
+      <validation-error [control]="workspaceForm.controls.description" [error]="''" [label]="componentLabels.description"></validation-error>
+    </mat-form-field>
+
+    <div class="modal-btns">
+      <button mat-raised-button color=primary id="save-btn" [disabled]="!workspaceForm.valid" type="submit">Save</button>
+      <button mat-raised-button class="default-btn" type="button" (click)="close()">Close</button>
+    </div>
+  </form>
+</div>

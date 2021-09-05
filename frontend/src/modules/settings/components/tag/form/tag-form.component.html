@@ -1,0 +1,77 @@
+<ng-template tdLoading="overlayStarSyntax">
+    <mat-card class="tag-card">
+        <mat-card-header>
+            <mat-card-title>
+                {{pageTitle}}
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+
+            <div td-toolbar-content layout="row" layout-align="center center" flex>
+                <span flex></span>
+                <detail-page-nav [page]="pageAction" [model]="tag" [url]="'/settings/tags/'" (deleteRecord)="deleteRecord($event)"></detail-page-nav>
+            </div>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <form [formGroup]="tagForm" novalidate (ngSubmit)="save(tagForm.value, tagForm.valid)">
+            <mat-card-content>
+
+                <!-- We'll add our form controls here -->
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+
+                        <input matInput required type="text" formControlName="name" [placeholder]="componentLabels.name" validate-onblur>
+                        <mat-error *ngIf="tagForm.controls.name.valid || (tagForm.controls.name.pristine && !submitted)">
+                            <validation-error [control]="tagForm.controls.name" [error]="''" [label]="componentLabels.name">
+
+                            </validation-error>
+
+                        </mat-error>
+                    </mat-form-field>
+
+
+                </div>
+                <div layout="column" layout-margin>
+                    <mat-form-field>
+                        <mat-select formControlName="data_type" required [placeholder]="componentLabels.data_type" fxFlex>
+                            <mat-option *ngFor="let type of tagTypes" value="{{type}}">
+                                {{type}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-error *ngIf="tagForm.controls.data_type.valid || (tagForm.controls.data_type.touched && !submitted)">
+                        <validation-error [control]="tagForm.controls.data_type" [error]="''" [label]="componentLabels.data_type">
+
+                        </validation-error>
+                    </mat-error>
+                </div>
+
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+                        <input matInput type="text" formControlName="description" [placeholder]="componentLabels.description" validate-onblur>
+
+                        <mat-error *ngIf="tagForm.controls.description.valid || (tagForm.controls.description.pristine && !submitted)">
+                            <validation-error [control]="tagForm.controls.description" [error]="''" [label]="componentLabels.description">
+
+                            </validation-error>
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <div layout="row" layout-margin>
+                    <mat-slide-toggle [checked]="tagForm.controls.status.value" formControlName="status">Active</mat-slide-toggle>
+                </div>
+
+            </mat-card-content>
+            <div *ngIf="editMode && editMode == true">
+                <mat-card-actions>
+                    <button type="submit" mat-raised-button color="primary" [disabled]="!tagForm.valid">Save</button>
+                    <a mat-button class="tc-grey-600" [routerLink]="['/settings/tags/']">Cancel</a>
+                </mat-card-actions>
+            </div>
+        </form>
+    </mat-card>
+
+
+</ng-template>

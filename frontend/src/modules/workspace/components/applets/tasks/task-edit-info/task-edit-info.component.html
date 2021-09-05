@@ -1,0 +1,52 @@
+<div class="modal-close-btn"><mat-icon (click)="dialogRef.close()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>Edit Task</h4></div>
+  <form [formGroup]="infoForm" (ngSubmit)="saveInfo(infoForm.value, infoForm.valid)" class="form-content">
+    <mat-form-field floatPlaceholder='never' class="input-wrapper">
+      <mat-select fxFlex placeholder="Not assigned" formControlName="assigned_to" [disabled]="currentUser && currentUser._id == task.assigned_to && task.assigned_to != task.created_by._id">
+        <mat-option *ngFor="let user of user_roles" [value]="user._id.id">
+          {{ user._id.fullname }} ({{user._id.user_id}})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-wrapper">
+      <input matInput [matDatepicker]="startPicker" placeholder="start date" formControlName="start_date" (click)="startPicker.open()"
+        (focus)="startPicker.open()">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+    </mat-form-field>
+
+    <mat-form-field class="input-wrapper">
+      <input matInput [matDatepicker]="duePicker" placeholder="due date" formControlName="due_date" (click)="duePicker.open()"
+        (focus)="duePicker.open()">
+      <mat-datepicker-toggle matSuffix [for]="duePicker"></mat-datepicker-toggle>
+    </mat-form-field>
+  
+    <mat-datepicker #startPicker></mat-datepicker>
+    <mat-form-field class="input-wrapper">
+      <mat-select placeholder="status" formControlName="status">
+        <mat-option *ngFor="let s of statusList" [value]="s">
+          {{ s }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-datepicker #duePicker></mat-datepicker>
+    <mat-form-field class="input-wrapper">
+      <mat-select placeholder="priority" formControlName="priority">
+        <mat-option *ngFor="let p of priorityList" [value]="p">
+          {{p}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-wrapper">
+      <textarea matInput placeholder="description" formControlName="description"> </textarea>
+    </mat-form-field>
+
+    <div class="modal-btns">
+      <button mat-raised-button color=primary class="primary" [disabled]="infoForm.pristine" type="submit">Update</button>
+      <button mat-raised-button class="default-btn" type="button" (click)="dialogRef.close()">Close</button>
+    </div>
+  </form>
+</div>

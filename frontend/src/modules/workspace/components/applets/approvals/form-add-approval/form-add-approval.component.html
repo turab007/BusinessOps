@@ -1,0 +1,68 @@
+<div class="modal-close-btn"><mat-icon (click)="dialogRef.close()"> close</mat-icon></div>
+<div class="dialog-wrapper" *ngIf="workspaces_list">
+  <div class="dialog-title"><h4>New Approval</h4></div>
+  <form [formGroup]="approvalForm" (ngSubmit)="save(approvalForm.value, approvalForm.valid)" id="add-approval-form" class="form-content">
+
+
+        <mat-form-field class="input-wrapper">
+          <input matInput type="text" formControlName="name" [placeholder]="componentLabels.name" required="true" maxlength="100" appFocus/>
+          <mat-error *ngIf="approvalForm.controls.name.valid || (approvalForm.controls.name.pristine && !submitted)">
+            <validation-error [control]="approvalForm.controls.name" [error]="''" [label]="componentLabels.name"></validation-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-wrapper">
+          <input matInput [matDatepicker]="dueDate" [placeholder]="componentLabels.due_date" formControlName="due_date" (click)="dueDate.open()"  (focus)="dueDate.open()">
+          <mat-datepicker-toggle matSuffix [for]="dueDate"></mat-datepicker-toggle>
+          <mat-datepicker #dueDate></mat-datepicker>
+        </mat-form-field>
+
+      <div *ngIf="!hiddenAddTaskField">
+        <mat-form-field class="input-wrapper">
+          <textarea matInput placeholder="Leave a comment"  wrap="hard"></textarea>
+        </mat-form-field>
+      </div>
+
+
+      <div *ngIf="!hiddenAddTaskField" class="input-full-width">
+        <mat-form-field class="input-wrapper">
+          <textarea matInput placeholder="Leave no comment"  wrap="hard"></textarea>
+        </mat-form-field>
+      </div>
+
+        <mat-form-field class="input-wrapper">
+            <input matInput [placeholder]="componentLabels.assign_to_workspace" formControlName="assign_to_workspace" [matAutocomplete]="auto">        </mat-form-field>
+
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let assign of filtered_data | async " [value]="assign">
+            <mat-icon *ngIf="assign.type=='user'">account_circle </mat-icon>
+            <mat-icon *ngIf="assign.type=='ws'">business </mat-icon>
+            {{assign.name}}
+          </mat-option>
+        </mat-autocomplete>
+
+        <div *ngIf="!hiddenAddTaskField" class="attachmentSection">
+          <div class="attachment-label" matTooltip="add" (click)="fileToUpload.click()">
+            <mat-icon>add</mat-icon> 
+            <span>Attachment</span>
+          </div>
+          <!-- Hidden as type file is not supported by material yet -->
+          <div class="fileAttachment">
+            <input #fileToUpload type="file" style="display:none;" multiple (change)="saveAttachmentName(fileToUpload)">
+            <mat-icon>attachment</mat-icon> 
+            <span>{{fileStore.length }}</span>
+          </div>
+        </div>
+
+        <div class="attach-nav-list">
+          <div *ngFor="let attach of fileStore; let i=index" class="nav-list-item">
+              <span class="attach-head">{{attach.name}}</span>
+              <button mat-icon-button class="icon-btn" type="button" mat-tooltip="delete" (click)="deleteAttachment(i)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </div>
+      <div class="modal-btns">
+        <button mat-raised-button color=primary id="save-btn" [disabled]="!approvalForm.valid" type="submit">Save</button>
+        <button mat-raised-button class="default-btn" type="button" (click)="dialogRef.close()">Cancel</button>
+      </div>
+  </form>
+</div>

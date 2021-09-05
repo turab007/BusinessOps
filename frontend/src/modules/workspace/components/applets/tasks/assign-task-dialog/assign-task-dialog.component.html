@@ -1,0 +1,18 @@
+<div class="modal-close-btn"><mat-icon (click)="dialogRef.close()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>Select Assigned to</h4></div>
+  <div class="form-content assignTaskSection">
+    <mat-list *ngIf="user_roles">
+      <div *ngFor="let user of user_roles">
+        <div (click)="assignTask(user._id)" class="assignTaskContent">
+          <div class="intials">
+            <span>{{user._id.initials}}</span>
+          </div>
+          <div class="labelTitle">{{user._id.fullname}}</div>
+        </div>
+      </div>
+    </mat-list>
+  </div>
+</div>
+
+

@@ -1,0 +1,21 @@
+<button mat-mini-fab color=primary class="fab-primary-btn" matTooltip="add group" matTooltipPosition="left" (click)="addApprovals()"><mat-icon>add</mat-icon></button>
+<div class="card" *ngIf="approvals && approvals.length == 0"  class="emptybox">
+  <span>No Approvals added yet</span>
+</div>
+<div class="task-container">  
+  <ng-container *ngIf="approvals && approvals.length>0">
+    <!-- <div class="app-task-group" > -->
+    <div class="cardSection">
+      <div class="card-wrapper"  *ngFor="let approvalGroup of approvalGroups; let i = index">
+        <div class="card-header">
+            <div class="card-title">
+              <span> {{approvalGroup}} </span>
+            </div>
+        </div>
+        <div class="card-content">
+          <app-approval [approvals]="approvals" [status]='approvalGroup' [ws]="ws._id"></app-approval>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

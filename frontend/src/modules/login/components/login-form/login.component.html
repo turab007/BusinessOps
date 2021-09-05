@@ -1,0 +1,47 @@
+<div class="login-container">
+    <form name="userForm" (ngSubmit)="onSubmit()" #LoginForm="ngForm">
+            <mat-card tdMediaToggle="gt-xs" [mediaClasses]="['push-top-lg']">
+                <div class="title-header">
+                    <h1>GroupCaptain</h1>
+                    <mat-card-title>Sign in</mat-card-title>
+                    <mat-card-subtitle>via your current account</mat-card-subtitle>
+                </div>
+                <mat-card-content>
+                    <div layout="row">
+                        <mat-form-field flex>
+                            <div class="formfield">
+                                <input matInput #email class="form-control" required="required" id="email" maxLength="35" name="email" #email="ngModel" [(ngModel)]="model.email"
+                                ngControl="email" placeholder="Email Address" align="start">
+                                <mat-hint align="start">
+                                    <span [hidden]="true" class="tc-red-600">Required</span>
+                                </mat-hint>
+                                <mat-hint align="end"></mat-hint>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div layout="row">
+                        <mat-form-field flex>
+                            <div class="formfield">
+                                <input matInput type='password' placeholder="Password" align="start" class="form-control" required="required" name="password"
+                                    #password="ngModel" [(ngModel)]="model.password" ngControl="password">                                
+                                <mat-hint align="start">
+                                    <span [hidden]="true" class="tc-red-600">Required</span>
+                                </mat-hint>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div layout="row">
+                        <mat-error [hidden]="errorMsg">
+                            {{errorMsg}}
+                        </mat-error>
+                    </div>
+                </mat-card-content>
+                <a class="infoText"  [routerLink]="['/auth/forgot-password']">Forgot Password?</a>
+                <mat-card-actions layout="row">
+                    <button type="submit" mat-fab mat-raised-button color="primary" [disabled]="!LoginForm.form.valid">
+                      <mat-icon>arrow_forward</mat-icon>                      
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+    </form>
+</div>

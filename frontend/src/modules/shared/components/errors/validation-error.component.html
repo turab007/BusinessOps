@@ -1,0 +1,25 @@
+<div *ngIf="control.hasError('required')">
+    {{label}} is required
+</div>
+<!--<div *ngIf="control.hasError('email')">
+    Invalid Email Address
+</div>-->
+<div *ngIf="control.hasError('pattern')">
+    Invalid {{label}}
+</div>
+
+<div *ngIf="control.hasError('maxlength')">
+   Maximum length  required is {{control.errors.maxlength.requiredLength}}
+</div>
+<div *ngIf="control.hasError('minlength')">
+   Minumum length required is  {{control.errors.minlength.requiredLength}}
+</div>
+<div *ngIf="control.hasError('unique')">
+   {{label}} already exists
+</div>
+<div *ngIf="control.hasError('old_password_not_matched')">
+   {{label}} not match with existing password
+</div>
+<div *ngIf="control.hasError('nomatch')">
+    {{label}} and New password must match
+</div>

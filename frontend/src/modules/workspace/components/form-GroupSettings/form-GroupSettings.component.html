@@ -1,0 +1,30 @@
+<div class="modal-close-btn"><mat-icon (click)="dialogRef.close()"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4>Group Settings</h4></div>
+  <form [formGroup]="settingForm" (ngSubmit)="addUser(settingForm.value,settingForm.valid)" class="form-content">
+      <mat-form-field class="input-wrapper">
+        <input matInput placeholder="Enter name" formControlName="user" [matAutocomplete]="auto">
+      </mat-form-field>
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let data of filteredData | async " [value]="data">
+          {{data.fullname}}
+        </mat-option>
+      </mat-autocomplete>
+
+      <mat-form-field class="input-wrapper">
+        <mat-select placeholder="Select role" formControlName="role" floatPlaceholder="never">
+          <mat-option *ngFor="let roles of userRoles" [value]="roles._id">
+            {{ roles.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="modal-btns">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!settingForm.valid">Add</button>
+        <button mat-raised-button class="default-btn" type="button" (click)="dialogRef.close()">Close</button>
+      </div>
+  </form>
+</div>
+
+
+

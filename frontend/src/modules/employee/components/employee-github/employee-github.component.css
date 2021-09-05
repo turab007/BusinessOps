@@ -1,0 +1,40 @@
+
+.git-icon
+{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.linkdiv
+{
+    padding-top: 20px;
+    height: 100px;
+}
+
+.commitDiv
+{
+    width: 100%;
+}
+
+.listHeading
+{
+    height: 60px;
+    background: #E7E7E7;
+}
+
+.listTitle
+{
+    padding-left: 10px;
+}
+
+.listHeading mat-icon, .listItem
+{
+    cursor: pointer;
+}
+
+.listItem:nth-child(even),.commits:nth-child(even){
+    background: #E7E7E7;
+}

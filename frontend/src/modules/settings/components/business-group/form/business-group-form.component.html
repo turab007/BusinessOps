@@ -1,0 +1,75 @@
+<ng-template tdLoading="overlayStarSyntax">
+    <mat-card class="business-group-card">
+        <mat-card-header>
+            <mat-card-title>
+                {{pageTitle}}
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+
+            <div td-toolbar-content layout="row" layout-align="center center" flex>
+                <span flex></span>
+                <detail-page-nav [page]="pageAction" [model]="businessGroup" [url]="'/settings/business-groups/'" (deleteRecord)="deleteRecord($event)"></detail-page-nav>
+            </div>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <form [formGroup]="businessGroupForm" novalidate (ngSubmit)="save(businessGroupForm.value, businessGroupForm.valid)">
+            <mat-card-content>
+
+                <!-- We'll add our form controls here -->
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+
+                        <input matInput required type="text" formControlName="name" [placeholder]="componentLabels.name" validate-onblur>
+                        <mat-error *ngIf="businessGroupForm.controls.name.valid || (businessGroupForm.controls.name.pristine && !submitted)">
+                            <validation-error [control]="businessGroupForm.controls.name" [error]="''" [label]="componentLabels.name">
+
+                            </validation-error>
+
+                        </mat-error>
+                    </mat-form-field>
+
+
+                </div>
+                <div layout="row" layout-margin>
+                    <mat-form-field fxFlex>
+                        <input matInput required type="text" formControlName="description" [placeholder]="componentLabels.description" validate-onblur>
+
+                        <mat-error *ngIf="businessGroupForm.controls.description.valid || (businessGroupForm.controls.description.pristine && !submitted)">
+                            <validation-error [control]="businessGroupForm.controls.description" [error]="''" [label]="componentLabels.description">
+
+                            </validation-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+
+                <div layout="row" layout-margin>
+                    <mat-slide-toggle [checked]="businessGroupForm.controls.status.value" formControlName="status">Active</mat-slide-toggle>
+                </div>
+
+                <mat-tab-group>
+                    <mat-tab label="Lead Stages">
+                        <div>
+                            <lead-status *ngIf="businessGroup" [business_group_id]="businessGroup._id"></lead-status>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Opportunity Stages">
+                        <div>
+                            <opportunity-status *ngIf="businessGroup" [business_group_id]="businessGroup._id"></opportunity-status>
+                        </div>
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </mat-card-content>
+            <div *ngIf="editMode && editMode == true">
+                <mat-card-actions>
+                    <button type="submit" mat-raised-button color="primary" [disabled]="!businessGroupForm.valid">Save</button>
+                    <a mat-button class="tc-grey-600" [routerLink]="['/settings/business-groups/']">Cancel</a>
+                </mat-card-actions>
+            </div>
+        </form>
+    </mat-card>
+
+
+</ng-template>

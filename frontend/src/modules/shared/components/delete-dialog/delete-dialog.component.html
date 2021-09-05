@@ -1,0 +1,11 @@
+<div class="modal-close-btn"><mat-icon (click)="dialogRef.close(false)"> close</mat-icon></div>
+<div class="dialog-wrapper">
+  <div class="dialog-title"><h4 *ngIf="name">{{name}}</h4></div>
+  <div class="confirmation-msg">
+    <p>Are you sure you want to delete {{name}}?</p>
+  </div>
+  <div class="modal-btns">
+    <button mat-raised-button color=primary class="primary" id="save-btn" type="button" (click)="dialogRef.close(true)">Delete</button>
+    <button mat-raised-button class="default-btn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+  </div>
+</div>

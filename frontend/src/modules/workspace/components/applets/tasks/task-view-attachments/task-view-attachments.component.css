@@ -1,0 +1,12 @@
+.attachmentSection{min-height: 190px;}
+.attachmentSection h4{font-size: 14px; color:#00bff3; margin: 0 0 30px; line-height: 1; font-weight: 400;}
+.attachmentSection .file-attachments{display: flex; align-items: flex-start; margin-bottom: 30px;}
+.attachmentSection .file-attachments .file-content{text-align: center;}
+.attachmentSection .file-attachments .file-content figure{position: relative; margin:0 auto 10px;text-align: center; width:25px;} 
+.attachmentSection .file-attachments .file-content figure img{display: inline-block;}
+.attachmentSection .file-attachments .file-content figure .mat-icon{position: absolute; top: -4px; left: -8px; font-size: 12px;width: 15px; height: 15px;line-height: 15px; display: block; border-radius: 100%; background-color:#c2c2c2; color: #fff; text-align: center; cursor:pointer;}
+.attachmentSection .file-attachments .file-content figure .mat-icon:hover{background-color: #00bff3;}
+.attachmentSection .file-attachments .file-desc{overflow:hidden; max-width:40px; font-size:12px; text-align:center; margin:0 5px; text-align: center;}
+.attachmentSection .attachment-link{display: inline-flex; align-items: center; color:#666; cursor:pointer;}
+.attachmentSection .attachment-link:hover{text-decoration: none;}
+.attachmentSection .attachment-link .mat-icon{margin-right: 10px;}

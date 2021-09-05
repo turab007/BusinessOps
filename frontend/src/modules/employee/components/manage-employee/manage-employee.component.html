@@ -1,0 +1,35 @@
+<div *ngIf="employees" class="employesContent">
+  <div class="modal-close-btn"><mat-icon (click)="close()"> close</mat-icon></div>
+  <div class="dialog-wrapper">
+    <div class="dialog-title"><h4 *ngIf="name">Employees</h4></div>
+    <div class="dashboard-card">
+      <ng-container *ngFor="let emp of employees">
+        <div (click)="navigate(emp)" *ngIf="emp.user" class="card-wrapper">
+          <div class="cardBox">
+            <div class="card-title">
+              <span>{{emp.user.name}}</span>
+            </div>
+
+            <div class="card-desc">
+              <span>{{emp.user.user_id}}</span>
+            </div>
+
+            <div class="ws-job-title">
+              <span *ngIf="emp.job_title">{{emp.job_title.value}}</span>
+            </div>
+
+            <div class="card-footer">
+              <div class="ws-initials" *ngIf="emp.created_by">
+                <span class="userlabel" matTooltip="Created by: {{emp.created_by.name}}" style.background="blue">{{emp.created_by.initials}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="employees && employees.length==0" class="no-record-wrapper">
+    <div class="no-record">No employees added yet</div>
+</div>

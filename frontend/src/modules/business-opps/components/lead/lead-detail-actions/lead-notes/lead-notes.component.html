@@ -1,0 +1,167 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <strong>Add Notes</strong>
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+        <form [formGroup]="fg" novalidate (ngSubmit)="save(fg.value, fg.valid)">
+            <div layout="column">
+                <div layout="row">
+                    <mat-form-field flex>
+                        <input matInput formControlName="subject" type="text" [placeholder]="componentLabels.subject">
+                        <mat-error *ngIf="fg.controls.subject.valid || (fg.controls.subject.pristine && !submitted)">
+                            <validation-error [control]="fg.controls.subject" [error]="''" [label]="componentLabels.subject"> </validation-error>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-checkbox formControlName="is_important" style="margin:10px 0px 0px 15px;">
+                        Important
+                    </mat-checkbox>
+                </div>
+
+                <mat-form-field flex>
+                    <textarea matInput formControlName="note" [placeholder]="componentLabels.note" rows="6"></textarea>
+                    <mat-error *ngIf="fg.controls.note.valid || (fg.controls.note.pristine && !submitted)">
+                        <validation-error [control]="fg.controls.note" [error]="''" [label]="componentLabels.note"> </validation-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div layout="row">
+                <span flex></span>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!fg.valid">Save</button>
+                <a mat-button class="tc-grey-600">Cancel</a>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<div>
+    <div style="text-align: center">
+        <h3>Today</h3>
+    </div>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <strong>Note Subject</strong>
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+
+        <mat-card-content>
+            <div style="text-align: justify">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
+                Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+                of Lorem Ipsum.
+            </div>
+
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+            <div layout="row">
+                <div layout="row" flex style="color:gray; font-size:12px; margin-top:4px;">
+                    <div flex="30">
+                        By: M Usman Saeed
+                    </div>
+                    <div flex>
+                        Today 05:15 PM
+                    </div>
+                </div>
+                <mat-checkbox>
+                    Important
+                </mat-checkbox>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>
+
+<div>
+    <div style="text-align: center">
+        <h3>Important</h3>
+    </div>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <strong>Note Subject</strong>
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+
+        <mat-card-content>
+            <div style="text-align: justify">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
+                Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+                of Lorem Ipsum.
+            </div>
+
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+            <div layout="row">
+                <div layout="row" flex style="color:gray; font-size:12px; margin-top:4px;">
+                    <div flex="30">
+                        By: M Usman Saeed
+                    </div>
+                    <div flex>
+                        Today 05:15 PM
+                    </div>
+                </div>
+                <mat-checkbox>
+                    Important
+                </mat-checkbox>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <strong>Note Subject</strong>
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+
+        <mat-card-content>
+            <div style="text-align: justify">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
+                Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+                of Lorem Ipsum.
+            </div>
+
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+            <div layout="row">
+                <div layout="row" flex style="color:gray; font-size:12px; margin-top:4px;">
+                    <div flex="30">
+                        By: M Usman Saeed
+                    </div>
+                    <div flex>
+                        Today 05:15 PM
+                    </div>
+                </div>
+                <mat-checkbox>
+                    Important
+                </mat-checkbox>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>

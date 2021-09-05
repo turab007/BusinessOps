@@ -1,0 +1,189 @@
+<ng-template tdLoading="overlayStarSyntax">
+    <mat-card class="user-card">
+        <mat-card-header>
+            <mat-card-title>
+                {{pageTitle}}
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+
+            <div td-toolbar-content layout="row" layout-align="center center" flex>
+                <span flex></span>
+                <detail-page-nav [page]="pageAction" [model]="opportunity" [url]="'/business-opps/opportunities/'" (deleteRecord)="deleteRecord($event)"></detail-page-nav>
+            </div>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <form [formGroup]="opportunityForm" novalidate (ngSubmit)="save(opportunityForm.value, opportunityForm.valid)">
+            <mat-card-content>
+
+                <div layout="row" layout-sm="column" layout-xs="column">
+                    <div flex layout-padding>
+                        <mat-radio-group formControlName="contact_type" (change)="onContactSelection($event.value)" layout="column" [disabled]="!editMode">
+                            <div layout="row">
+                                <mat-form-field fxFlex>
+                                    <input matInput formControlName="name" required type="text" [placeholder]="componentLabels.name">
+                                    <mat-error *ngIf="opportunityForm.controls.name.valid || (opportunityForm.controls.name.pristine && !submitted)">
+                                        <validation-error [control]="opportunityForm.controls.name" [error]="''" [label]="componentLabels.name">
+
+                                        </validation-error>
+
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div layout="row" layout-padding-left>
+                                <div fxFlex>
+                                    <mat-radio-button value="new" [checked]="opportunity && opportunity.contact_type=='new'"></mat-radio-button>
+                                    <mat-form-field fxFlex>
+
+                                        <input matInput formControlName="contact_name" type="text" [placeholder]="componentLabels.contact_name">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <gc-auto-complete [gcFormGroup]="opportunityForm" [label]="componentLabels.contact_id" [keyControlName]="'contact_id'" [titleControlName]="'contact_id_title'"
+                                [control]="opportunityForm.controls.contact_id_title" [required]="false" [service]="_contactService"
+                                [responseKey]="'contacts'" [nameKey]="'first_name'" [idKey]="'_id'" [populatedFields]="{}" (selectedAutoCompleteItem)="setSelectedAutoCompleteItem($event)"
+                                [checkBox]="true" [checkBoxValue]="'existing'" [isChecked]="opportunity && opportunity.contact_type=='existing' ">
+                            </gc-auto-complete>
+                        </mat-radio-group>
+
+                        <mat-radio-group formControlName="company_type" (change)="onCompanySelection($event.value)" layout="column" [disabled]="!editMode">
+                            <div layout="row" layout-padding-left>
+                                <div fxFlex>
+                                    <mat-radio-button value="new" [checked]="opportunity && opportunity.company_type=='new'"></mat-radio-button>
+                                    <mat-form-field fxFlex>
+                                        <input matInput formControlName="company_name" type="text" [placeholder]="componentLabels.company_name">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div layout="row" layout-padding-left>
+                                <div fxFlex>
+                                    <mat-radio-button value="existing" [checked]="opportunity && opportunity.company_type=='existing'"></mat-radio-button>
+                                    <mat-form-field fxFlex>
+                                        <input matInput formControlName="company_id_title" type="text" [placeholder]="componentLabels.company_id">
+                                        <input formControlName="company_id" type="hidden">
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-radio-group>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="designation" type="text" [placeholder]="componentLabels.designation">
+                            </mat-form-field>
+                        </div>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="address1" type="text" [placeholder]="componentLabels.address1">
+                            </mat-form-field>
+                        </div>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="address2" type="text" [placeholder]="componentLabels.address2">
+                            </mat-form-field>
+                        </div>
+                        <div layout="row" layout-padding-left>
+                            <div fxFlex>
+                                <mat-form-field flex>
+                                    <input matInput formControlName="address_city" type="text" [placeholder]="componentLabels.address_city">
+                                </mat-form-field>
+                                <mat-form-field flex>
+                                    <input matInput formControlName="address_zip" type="text" [placeholder]="componentLabels.address_zip">
+                                </mat-form-field>
+
+                                <mat-form-field flex>
+                                    <input matInput formControlName="address_state" type="text" [placeholder]="componentLabels.address_state">
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="address_country" type="text" [placeholder]="componentLabels.address_country">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                    <div flex layout-padding>
+
+
+                        <gc-auto-complete [gcFormGroup]="opportunityForm" [label]="componentLabels.time_zone" [keyControlName]="'time_zone'" [titleControlName]="'time_zone_title'"
+                            [control]="opportunityForm.controls.time_zone_title" [required]="false" [service]="_opportunityService"
+                            method="getTimeZones" [responseKey]="''" [nameKey]="'name'" [idKey]="'_id'" [populatedFields]="{}"
+                            (selectedAutoCompleteItem)="setSelectedAutoCompleteItem($event)">
+                        </gc-auto-complete>
+
+                        <div layout="row">
+                            <mat-form-field>
+                                <mat-select required *ngIf="businessGroups" formControlName="business_group" [placeholder]="componentLabels.business_group"
+                                    fxFlex>
+                                    <mat-option *ngFor="let businessGroup of businessGroups" [value]="businessGroup._id">
+                                        {{businessGroup.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div layout="row">
+                            <mat-form-field>
+                                <mat-select required *ngIf="businessGroupStatuses" formControlName="status" [placeholder]="componentLabels.status" fxFlex>
+                                    <mat-option *ngFor="let businessGroupStatus of businessGroupStatuses" [value]="businessGroupStatus._id">
+                                        {{businessGroupStatus.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div layout="column">
+                            <multi-selector [data]="interestedTechnologies" [msFormGroup]="opportunityForm" [preSelected]="" [label]="componentLabels.intersted_in"
+                                [controlName]="'intersted_in'" [control]="opportunityForm.controls.intersted_in" [required]="true"
+                                (selectedItems)="setChangedItems($event)">
+                            </multi-selector>
+
+
+                            <mat-error *ngIf="opportunityForm.controls.intersted_in.valid || (opportunityForm.controls.intersted_in.touched && !submitted)">
+                                <validation-error [control]="opportunityForm.controls.intersted_in" [error]="''" [label]="componentLabels.intersted_in">
+
+                                </validation-error>
+                            </mat-error>
+                        </div>
+
+                        <div layout="row" *ngFor="let control of opportunityForm.controls['contact_modes'].controls; let i = index">
+                            <div flex>
+                                <opportunity-contact-modes-component [editMode]="editMode" [myForm]="opportunityForm.controls.contact_modes.controls[i]"
+                                    flex></opportunity-contact-modes-component>
+                            </div>
+                            <div flex="10" style="text-align:right" *ngIf="editMode && editMode == true">
+                                <a mat-icon-button (click)="delInput(i)">
+                                    <mat-icon class="t2">clear</mat-icon>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div layout="row" flex layout-padding-top *ngIf="editMode && editMode == true">
+                            <a mat-button class="tc-grey-600" (click)="addInput()">
+                                <mat-icon class="t2">add</mat-icon>Add More
+                            </a>
+                        </div>
+                        <div layout="row">
+                            <mat-form-field fxFlex>
+                                <input matInput formControlName="description" type="text" [placeholder]="componentLabels.description">
+                            </mat-form-field>
+                        </div>
+                        <div layout="row" flex layout-padding-top>
+                            <mat-slide-toggle [checked]="opportunityForm.controls.is_active.value" formControlName="is_active">{{componentLabels.is_active}}</mat-slide-toggle>
+                        </div>
+                    </div>
+                </div>
+
+
+            </mat-card-content>
+            <div *ngIf="editMode && editMode == true">
+                <mat-card-actions>
+                    <button type="submit" mat-raised-button color="primary" [disabled]="!opportunityForm.valid">Save</button>
+                    <a mat-button class="tc-grey-600" [routerLink]="['/business-opps/opportunities/create/']">Cancel</a>
+                </mat-card-actions>
+            </div>
+        </form>
+    </mat-card>
+
+
+</ng-template>

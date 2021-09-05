@@ -1,0 +1,63 @@
+<mat-card class="task-card">
+  <mat-card-content *ngIf="taskGroup && task" class="tasklist">
+    <div class="card-wrapper">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="intials">
+            <span *ngIf="task.assigned_to">{{task.assigned_to.initials}}</span>
+          </div>
+          <div *ngIf="task.assigned_to" class="assignedLabel">
+            {{task.assigned_to.fullname}}
+          </div>
+          <div *ngIf="!task.assigned_to" class="assignedLabel">
+            Not Assigned
+          </div>
+        </div>
+        <div class="actionbtns">
+          <div class="iconDiv">
+            <a (click)="assignTask(task,$event)" matTooltip="Assign Task">
+              <mat-icon>person_add</mat-icon>
+            </a>
+            <a (click)="editTask(task,$event)" matTooltip="Edit Task">
+              <mat-icon>edit</mat-icon>
+            </a>
+            <a (click)="deleteTask(task,$event)" matTooltip="Delete Task">
+              <mat-icon>delete</mat-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="card-label">{{ task.name }}</div>
+        <div class="card-desc">{{task.description}}</div>
+      </div>
+      <div class="card-footer">
+        <div class="actionbtns">
+          <mat-icon *ngIf="task.description" matTooltip="description" class="info-subject">subject</mat-icon>
+          <div class="icon-list">
+            <ng-container *ngIf="task.comments && task.comments.length != 0">
+              <div class="info-icon" matTooltip="Comments">
+                <mat-icon class="prefix-icon">comment</mat-icon>
+                <div class="itemlength">{{task.comments.length}}</div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="task.attachments && task.attachments != 0">
+              <div class="info-icon" matTooltip="attachments">
+                <mat-icon class="prefix-icon">attachment</mat-icon>
+                <div class="itemlength"> {{task.attachments.length}}</div>
+              </div>
+            </ng-container>
+            <mat-menu #taskMenu="matMenu" yPosition="below" [overlapTrigger]="false" class="task-menu">
+              <mat-list class="menu-list">
+                <a mat-menu-item (click)="deleteTask(task)" class="menu-item" fxLayout="row" fxLayoutAlign="flex-start center">
+                  <mat-icon class="menu-icn">delete</mat-icon>
+                  <span class="menu-text">delete</span>
+                </a>
+              </mat-list>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

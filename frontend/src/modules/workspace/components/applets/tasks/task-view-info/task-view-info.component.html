@@ -1,0 +1,29 @@
+
+<div class="task-view-info">
+  <div class="info-content">
+    <span>Assigned to:</span>
+    <span class="grey"  *ngIf="assigned_to">{{assigned_to.fullname}}</span>
+    <span class="grey" *ngIf="!assigned_to">Not assigned</span>
+  </div> 
+
+  <div class="info-content">
+    <span>Start Date:</span>
+    <span class="grey" *ngIf="task.start_date">{{task.start_date | date:'longDate'}}</span>
+  </div>
+
+  <div class="info-content">
+    <span>End Date:</span>
+    <span class="grey" *ngIf="task.due_date">{{task.due_date | date:'longDate'}}</span>
+  </div>
+
+  <div class="info-content">
+    <span>Status:</span>
+    <span class="grey" *ngIf="task.status">{{task.status}}</span>
+  </div>
+
+  <div class="info-content">
+    <span>Priority:</span>
+    <span class="grey" *ngIf="task.priority">{{task.priority}}</span>
+  </div>
+
+</div>

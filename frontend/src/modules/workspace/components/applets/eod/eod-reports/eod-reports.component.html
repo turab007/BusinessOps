@@ -1,0 +1,24 @@
+<div class="eod-card-wrapper">
+  <mat-card *ngFor="let eod of eodReports" class="eod-card" (click)="viewEod(eod)">
+    <div class="actionbtns">
+      <mat-icon (click)="editEod($event,eod)">edit</mat-icon>
+      <mat-icon (click)="deleteEod($event,eod)">delete</mat-icon>
+    </div>
+    <div class="card-item">
+      <strong>Date</strong>
+      <span>: {{eod.date | date:'longDate'}}</span>
+    </div>
+    <div class="card-item">
+      <strong>Reported by</strong>
+      <span>: {{eod.created_by.fullname}}</span>
+    </div>
+    <div class="card-item">
+      <strong>Created at</strong>
+      <span>: {{eod.created_at | date:'medium'}}</span>
+    </div>
+    <div class="card-item">
+      <strong>Last Updated at</strong>
+      <span>: {{eod.updated_at | date:'medium'}}</span>
+    </div>
+  </mat-card>
+</div>

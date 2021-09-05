@@ -1,0 +1,39 @@
+<div class="sidebar-heading">Comment</div>
+<div class="commentSection">
+  <div class="comment-list" *ngFor="let c of comments">
+    <div class="userInitials">
+      <span class="labelTitle">{{c.created_by.initials}}</span>
+    </div>
+    <div class="comment-list-item">
+      <div class="userInfo">
+        <div class="u-name">{{c.created_by.fullname}}</div>
+        <div class="time" [matTooltip]="c.created_at | date:'medium' ">{{c.createdAgo}}</div>
+        <div class="comment">{{c.comment}}</div>
+      </div>
+      <div class="more-btn">
+          <!-- <button mat-icon-button matTooltip="options" [matMenuTriggerFor]="cmntMenu">
+            <mat-icon class="option-icn">more_vert</mat-icon>
+          </button> -->
+          <!-- <mat-menu #cmntMenu="matMenu" yPosition="below" [overlapTrigger]="false" class="comment-menu"> -->
+            <!-- <mat-list class="menu-list"> -->
+              <a (click)="editComment(c)" class="menu-item" fxLayout="row" fxLayoutAlign="flex-start center">
+                <mat-icon class="menu-icn">mode_edit</mat-icon>  
+              </a>
+              <a (click)="deleteComment(c)" class="menu-item" fxLayout="row" fxLayoutAlign="flex-start center">
+                <mat-icon class="menu-icn">delete</mat-icon>
+              </a>
+            <!-- </mat-list> -->
+          <!-- </mat-menu> -->
+        </div>
+    </div>
+    <div class="no-record" *ngIf="!comments || comments.length == 0">
+        no comments added yet.
+    </div>
+  </div>
+</div>
+<form [formGroup]="commentForm" (ngSubmit)="saveComment(commentForm.value, commentForm.valid)" class="comment-field">
+  <mat-form-field class="input-wrapper">
+    <input matInput formControlName="comment" placeholder="Write Comment" />
+  </mat-form-field>
+  <button type=submit class="commentbtn"><mat-icon>send</mat-icon></button>
+</form>

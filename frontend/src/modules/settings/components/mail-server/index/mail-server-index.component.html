@@ -1,0 +1,28 @@
+<mat-card class="user-card">
+
+    <mat-card-header>
+        <mat-card-title>Configuration</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <div td-toolbar-content layout="row" layout-align="center center" flex>
+            <span flex></span>
+            <mat-list-item>
+                <span>
+                    <button mat-icon-button [mat-menu-trigger-for]="menu" style="margin-top:3px;">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu x-position="before" #menu="matMenu">
+                        <a [routerLink]="['/settings/mail-servers/'+ 'test-mail']" mat-menu-item>
+                            <mat-icon>email</mat-icon> Test
+                        </a>
+                    </mat-menu>
+                </span>
+            </mat-list-item>
+
+        </div>
+    </mat-card-header>
+    <mat-card-content>
+        <datatable *ngIf="mailServers" [dataList]="mailServers" [columns]="dtColumns" [actionButtons]="actionButtons" [totalRecords]="totalRecords"
+            [sortBy]="'host'" (deleteRecord)="deleteRecord($event)" (nextPage)="nextPage($event)" (filterRecords)="filterRecords($event)"></datatable>
+    </mat-card-content>
+
+</mat-card>

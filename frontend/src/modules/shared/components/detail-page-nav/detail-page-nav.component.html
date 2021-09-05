@@ -1,0 +1,24 @@
+<mat-list-item>
+    <span>
+        <button mat-icon-button [mat-menu-trigger-for]="menu" style="margin-top:3px;">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu x-position="before" #menu="matMenu">
+            <a [routerLink]="[url]" mat-menu-item>
+                <mat-icon>list</mat-icon> List All
+            </a>
+            <a *ngIf="page == 'view' && model" [routerLink]="[url + 'update',model['_id']]" mat-menu-item>
+                <mat-icon>edit</mat-icon>Update
+            </a>
+            <a *ngIf="page == 'update' && model && leadActionLink != true" [routerLink]="[url, model['_id']]" mat-menu-item>
+                <mat-icon>visibility</mat-icon> View
+            </a>
+            <a *ngIf="page != 'create' && leadActionLink == true && model" [routerLink]="[url + '/detail-actions', model['_id']]" mat-menu-item>
+                <mat-icon>visibility</mat-icon> View
+            </a>
+            <a *ngIf="page != 'create' && model" (click)="delete(model)" mat-menu-item>
+                <mat-icon>delete</mat-icon> Delete
+            </a>
+        </mat-menu>
+    </span>
+</mat-list-item>

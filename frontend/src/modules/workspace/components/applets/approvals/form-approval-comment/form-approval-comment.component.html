@@ -1,0 +1,17 @@
+<div class="modal-close-btn"><mat-icon (click)="close()"> close</mat-icon></div>
+<div class="dialog-wrapper edit-comment">
+  <div class="dialog-title"><h4>Edit Comemnt</h4></div>
+  <form [formGroup]="commentForm" (ngSubmit)="save(commentForm.value, commentForm.valid)" class="form-content">
+    <mat-form-field class="input-wrapper">
+      <textarea matInput formControlName="comment" placeholder="Write comment" wrap="hard"></textarea>
+      <mat-error *ngIf="commentForm.controls.comment.valid || (commentForm.controls.comment.pristine && !submitted)">
+        <validation-error [control]="commentForm.controls.comment" [error]="''" [label]="componentLabels.comment"></validation-error>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="modal-btns">
+      <button mat-raised-button color=primary [disabled]="!commentForm.valid" type="submit">Save</button>
+      <button mat-raised-button class="default-btn" type="button" (click)="close()">Close</button>
+    </div>
+  </form>
+</div>
